@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.cpp
+cassert
+-
+cmath
+-
+Net.h
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.h
+
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.h
+sstream
+-
+vector
+-
+Neuron.h
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Neuron.h
+
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Neuron.h
+vector
+-
+
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.cpp
+sstream
+-
+fstream
+-
+TrainingData.h
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h
+
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h
+string
+-
+vector
+-
+

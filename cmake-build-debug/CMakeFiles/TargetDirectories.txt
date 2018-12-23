@@ -1,0 +1,3 @@
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/edit_cache.dir
