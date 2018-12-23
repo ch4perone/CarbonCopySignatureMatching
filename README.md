@@ -1,0 +1,2 @@
+# CarbonCopySignatureMatching
+Machine Learning method for classification of human signatures using (multiple) neural networks . The model requires digital signature tracks (hand-drawn) and captures directional mouse/pen movement. A deep neural network is then trained based on the sinature tracks. Alternatively a bootstrapping approach can be selected to train multiple neural networks of different composition on a subset of the training data. In addition statistical testing as well as live-testing (by hand) is featured. [Work in progress]
