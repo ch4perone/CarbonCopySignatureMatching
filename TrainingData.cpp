@@ -1,7 +1,31 @@
 #include <sstream>
 #include <fstream>
+#include <algorithm>
+#include <iostream>
 #include "TrainingData.h"
 
+
+TrainingData::TrainingData(string path, int resolution) {
+    //todo: load all files of type .signature.tsv
+    vector<string> files;
+    this->resolution = resolution;
+
+    for(string file : files) {
+        ifstream f(file, ios::in);
+        while(!f.eof()) {
+            string line;
+            getline(f, line);
+
+            DataPiece dp = generateDataPiece(line);
+            trainingPieces.push_back(dp);
+        }
+    }
+
+}
+
+TrainingData::~TrainingData() {
+    //Maybe clean up all DataPieces
+}
 
 TrainingData::TrainingData(const vector<string> filename_v) {
     total_inputNum = (int) filename_v.size() - 1;
@@ -79,4 +103,54 @@ unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputVals) {
     }
     return (unsigned int) targetOutputVals.size();
 
+}
+
+DataPiece TrainingData::generateDataPiece(string line) {
+    //Todo parse data piece
+    return DataPiece({1.2,1.2},{1.2, 1.2});
+}
+
+void TrainingData::shuffleTrainingData() {
+    random_shuffle(trainingPieces.begin(), trainingPieces.end());
+}
+
+void TrainingData::splitTestTrainingData(float trainingProporting) {
+    //TODO now
+}
+
+DataPiece TrainingData::getNextTrainingDataPiece() {
+    DataPiece dp = trainingPieces[trainingIndex];
+    ++trainingIndex;
+    return dp;
+}
+
+DataPiece TrainingData::getNextTestDataPiece() {
+    DataPiece dp = testPieces[testIndex];
+    ++testIndex;
+    return dp;
+}
+
+float TrainingData::getTrainingProgress() {
+    return float(trainingIndex) / float(trainingPieces.size());
+}
+
+float TrainingData::getTestProgress() {
+    return float(testIndex) / float(testPieces.size());
+}
+
+void TrainingData::restartTraining() {
+    trainingIndex = 0;
+}
+
+void TrainingData::restartTesting() {
+    testIndex = 0;
+}
+
+
+
+
+
+void TrainingData::flushTrainingProgressToConsole(int currentEpoch, int maxEpoch) {
+    cout << "\r[epoch " << currentEpoch << "/" << maxEpoch << "]" << " progress: " << getTrainingProgress() << flush;
+    //TODO make fancy progress bar
 }

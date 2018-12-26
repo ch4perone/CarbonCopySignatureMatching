@@ -102,6 +102,9 @@
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h">
 			<Option target="CarbonCopySignatureMatching"/>
 		</Unit>
+		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-track.cpp">
+			<Option target="CarbonCopySignatureMatching"/>
+		</Unit>
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-train.cpp">
 			<Option target="CarbonCopySignatureMatching"/>
 		</Unit>

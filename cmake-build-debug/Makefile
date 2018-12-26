@@ -204,6 +204,33 @@ TrainingData.cpp.s:
 	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.s
 .PHONY : TrainingData.cpp.s
 
+ccsm-track.o: ccsm-track.cpp.o
+
+.PHONY : ccsm-track.o
+
+# target to build an object file
+ccsm-track.cpp.o:
+	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.o
+.PHONY : ccsm-track.cpp.o
+
+ccsm-track.i: ccsm-track.cpp.i
+
+.PHONY : ccsm-track.i
+
+# target to preprocess a source file
+ccsm-track.cpp.i:
+	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.i
+.PHONY : ccsm-track.cpp.i
+
+ccsm-track.s: ccsm-track.cpp.s
+
+.PHONY : ccsm-track.s
+
+# target to generate assembly for a file
+ccsm-track.cpp.s:
+	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.s
+.PHONY : ccsm-track.cpp.s
+
 ccsm-train.o: ccsm-train.cpp.o
 
 .PHONY : ccsm-train.o
@@ -249,6 +276,9 @@ help:
 	@echo "... TrainingData.o"
 	@echo "... TrainingData.i"
 	@echo "... TrainingData.s"
+	@echo "... ccsm-track.o"
+	@echo "... ccsm-track.i"
+	@echo "... ccsm-track.s"
 	@echo "... ccsm-train.o"
 	@echo "... ccsm-train.i"
 	@echo "... ccsm-train.s"

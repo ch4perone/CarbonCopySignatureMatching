@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cxxopts.hpp>
+#include "TrainingData.h"
 
 /*
  * This is CCSM in its full glory
@@ -42,6 +43,10 @@ cxxopts::ParseResult parseArguments(int argc, char **argv) {
             cout << options.help({"", "Group", "Data", "Training", "Network", "Replication"}) << endl;
             exit(0);
         }
+        if (!result.count("resolution")) {
+            cout << "error parsing options: Argument missing: " << " --resolution" << endl;
+            exit(1);
+        }
         return result;
 
     } catch (const cxxopts::OptionException& e)
@@ -52,7 +57,12 @@ cxxopts::ParseResult parseArguments(int argc, char **argv) {
 
 }
 
-
+template<typename T> T setDefault_readInputValue(T defaultValue, const string &inputName, const cxxopts::ParseResult &args) {
+    if (args.count(inputName)) {
+        return args[inputName].as<T>();
+    }
+    return defaultValue;
+}
 
 int main(int argc, char** argv) {
 
@@ -61,12 +71,37 @@ int main(int argc, char** argv) {
     auto argsList = args.arguments();
 
 
-
     // Train network(s)
     if (!args.count("multiples")) {
         //Generate a single initial neural network
 
+        //Load training data
+        cout << "Load training data" << endl;
+        TrainingData trainingData("../signatures", args["resolution"].as<int>());
+        trainingData.shuffleTrainingData();
+        auto trainTestSplit = setDefault_readInputValue<float>(0.8f, "trainTestSplit", args);
+        trainingData.splitTestTrainingData(trainTestSplit);
+
         //Train network
+        int epochs = setDefault_readInputValue<int>(100, "epochs", args);
+        cout << "Begin training" << endl;
+        for (int e = 1; e <= epochs; ++e) {
+
+            //Train entire epoch
+            while(trainingData.getTrainingProgress() < 1) {
+
+                trainingData.flushTrainingProgressToConsole(e, epochs);
+                DataPiece input = trainingData.getNextTrainingDataPiece();
+                //TODO train network with input.X and input.Y
+            }
+            //Validate test and training accuracy at epoch end
+            while(trainingData.getTestProgress() < 1) {
+                //TODO read up on softmax and test/validation error and accuracy
+            }
+
+        }
+        cout << endl;
+
     }
     else {
         cout << "producing " << args["multiples"].as<int>() << " networks" << endl;
