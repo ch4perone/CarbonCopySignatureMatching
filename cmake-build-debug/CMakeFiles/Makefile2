@@ -65,39 +65,76 @@ CMAKE_SOURCE_DIR = /home/chaperone/projects/cpp/CarbonCopySignatureMatching
 CMAKE_BINARY_DIR = /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug
 
 #=============================================================================
-# Target rules for target CMakeFiles/CarbonCopySignatureMatching.dir
+# Target rules for target CMakeFiles/ccsm-train.dir
 
 # All Build rule for target.
-CMakeFiles/CarbonCopySignatureMatching.dir/all:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/depend
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6 "Built target CarbonCopySignatureMatching"
-.PHONY : CMakeFiles/CarbonCopySignatureMatching.dir/all
+CMakeFiles/ccsm-train.dir/all:
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/depend
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles --progress-num=3,4,5,6,7 "Built target ccsm-train"
+.PHONY : CMakeFiles/ccsm-train.dir/all
 
 # Include target in all.
-all: CMakeFiles/CarbonCopySignatureMatching.dir/all
+all: CMakeFiles/ccsm-train.dir/all
 
 .PHONY : all
 
 # Build rule for subdir invocation for target.
-CMakeFiles/CarbonCopySignatureMatching.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles 6
-	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/CarbonCopySignatureMatching.dir/all
+CMakeFiles/ccsm-train.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles 5
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ccsm-train.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles 0
-.PHONY : CMakeFiles/CarbonCopySignatureMatching.dir/rule
+.PHONY : CMakeFiles/ccsm-train.dir/rule
 
 # Convenience name for target.
-CarbonCopySignatureMatching: CMakeFiles/CarbonCopySignatureMatching.dir/rule
+ccsm-train: CMakeFiles/ccsm-train.dir/rule
 
-.PHONY : CarbonCopySignatureMatching
-
-# clean rule for target.
-CMakeFiles/CarbonCopySignatureMatching.dir/clean:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/clean
-.PHONY : CMakeFiles/CarbonCopySignatureMatching.dir/clean
+.PHONY : ccsm-train
 
 # clean rule for target.
-clean: CMakeFiles/CarbonCopySignatureMatching.dir/clean
+CMakeFiles/ccsm-train.dir/clean:
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/clean
+.PHONY : CMakeFiles/ccsm-train.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ccsm-train.dir/clean
+
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/ccsm-track.dir
+
+# All Build rule for target.
+CMakeFiles/ccsm-track.dir/all:
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/depend
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/build
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles --progress-num=1,2 "Built target ccsm-track"
+.PHONY : CMakeFiles/ccsm-track.dir/all
+
+# Include target in all.
+all: CMakeFiles/ccsm-track.dir/all
+
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/ccsm-track.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles 2
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/ccsm-track.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles 0
+.PHONY : CMakeFiles/ccsm-track.dir/rule
+
+# Convenience name for target.
+ccsm-track: CMakeFiles/ccsm-track.dir/rule
+
+.PHONY : ccsm-track
+
+# clean rule for target.
+CMakeFiles/ccsm-track.dir/clean:
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/clean
+.PHONY : CMakeFiles/ccsm-track.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/ccsm-track.dir/clean
 
 .PHONY : clean
 

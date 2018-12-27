@@ -11,6 +11,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "CMakeFiles/3.13.2/CMakeCCompiler.cmake"
   "CMakeFiles/3.13.2/CMakeCXXCompiler.cmake"
   "CMakeFiles/3.13.2/CMakeSystem.cmake"
+  "FindSFML.cmake"
   "/snap/clion/57/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCInformation.cmake"
   "/snap/clion/57/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCXXInformation.cmake"
   "/snap/clion/57/bin/cmake/linux/share/cmake-3.13/Modules/CMakeCommonLanguageInclude.cmake"
@@ -46,5 +47,6 @@ set(CMAKE_MAKEFILE_PRODUCTS
 
 # Dependency information for all targets:
 set(CMAKE_DEPEND_INFO_FILES
-  "CMakeFiles/CarbonCopySignatureMatching.dir/DependInfo.cmake"
+  "CMakeFiles/ccsm-train.dir/DependInfo.cmake"
+  "CMakeFiles/ccsm-track.dir/DependInfo.cmake"
   )

@@ -3,7 +3,6 @@ file(REMOVE_RECURSE
   "CMakeFiles/CarbonCopySignatureMatching.dir/Neuron.cpp.o"
   "CMakeFiles/CarbonCopySignatureMatching.dir/Net.cpp.o"
   "CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.o"
-  "CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.o"
   "CarbonCopySignatureMatching.pdb"
   "CarbonCopySignatureMatching"
 )

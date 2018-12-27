@@ -3,6 +3,7 @@
   <component name="CMakeRunConfigurationManager" shouldGenerate="true" shouldDeleteObsolete="true">
     <generated>
       <config projectName="CarbonCopySignatureMatching" targetName="CarbonCopySignatureMatching" />
+      <config projectName="CarbonCopySignatureMatching" targetName="ccsm-track" />
     </generated>
   </component>
   <component name="CMakeSettings">
@@ -12,23 +13,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="127a733b-2360-4371-b420-68475f55928a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/ccsm-track.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrainingData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TrainingData.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrainingData.h" beforeDir="false" afterPath="$PROJECT_DIR$/TrainingData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ccsm-train.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ccsm-train.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/CXX.includecache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ccsm-track.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ccsm-track.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeCache.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/DependInfo.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/DependInfo.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/build.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/build.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-train.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-train.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/cmake_clean.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/cmake_clean.cmake" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/depend.internal" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/depend.internal" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/depend.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/depend.make" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/link.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/link.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/progress.make" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/CarbonCopySignatureMatching.dir/progress.make" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Makefile2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TargetDirectories.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/clion-log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/progress.marks" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CarbonCopySignatureMatching" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CarbonCopySignatureMatching" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CarbonCopySignatureMatching.cbp" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CarbonCopySignatureMatching.cbp" afterDir="false" />
@@ -44,33 +43,42 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Debug" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="108">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="95">
+              <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cmake-build-debug/FindSFML.cmake">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-585" />
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ccsm-train.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="339">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
+            <state relative-caret-position="960">
+              <caret line="66" column="7" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
-                <element signature="e#2651#2654#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ccsm-track.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret lean-forward="true" />
+            <state relative-caret-position="260">
+              <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -78,7 +86,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Net.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22">
+            <state relative-caret-position="15">
               <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
             </state>
           </provider>
@@ -87,7 +95,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TrainingData.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
+            <state relative-caret-position="2310">
               <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -99,7 +107,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file:///usr/include/cxxopts.hpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
+            <state relative-caret-position="15765">
               <caret line="1051" selection-start-line="1051" selection-end-line="1051" />
             </state>
           </provider>
@@ -108,7 +116,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TrainingData.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
+            <state relative-caret-position="780">
               <caret line="52" column="70" selection-start-line="52" selection-start-column="70" selection-end-line="52" selection-end-column="70" />
               <folding>
                 <element signature="e#103#120#0" expanded="true" />
@@ -120,7 +128,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Net.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="162">
+            <state relative-caret-position="135">
               <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
               <folding>
                 <element signature="e#85#103#0" expanded="true" />
@@ -150,9 +158,10 @@
         <option value="$PROJECT_DIR$/Net.cpp" />
         <option value="$PROJECT_DIR$/TrainingData.h" />
         <option value="$PROJECT_DIR$/TrainingData.cpp" />
-        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
-        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
         <option value="$PROJECT_DIR$/ccsm-track.cpp" />
+        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
+        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
+        <option value="$PROJECT_DIR$/CMakeLists.txt" />
       </list>
     </option>
   </component>
@@ -168,6 +177,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,7 +189,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -188,6 +197,12 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="JavaScript.Libraries" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmake-build-debug" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -201,12 +216,27 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="CarbonCopySignatureMatching" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--epochs 500 --trainTestSplit 0.5 --resolution 12" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="CarbonCopySignatureMatching" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="CarbonCopySignatureMatching">
+  <component name="RunManager" selected="Application.ccsm-train">
+    <configuration name="CarbonCopySignatureMatching" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="CarbonCopySignatureMatching" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="CarbonCopySignatureMatching">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
+    <configuration name="ccsm-track" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="Yannek" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="ccsm-track" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="ccsm-track">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ccsm-train" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="--resolution 12 --epochs 500" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="ccsm-train" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="ccsm-train">
+      <method v="2">
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.CarbonCopySignatureMatching" />
+      <item itemvalue="Application.ccsm-track" />
+      <item itemvalue="Application.ccsm-train" />
+    </list>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -219,18 +249,21 @@
       <option name="presentableId" value="Default" />
       <updated>1545306611792</updated>
       <workItem from="1545306613025" duration="19223000" />
-      <workItem from="1545747174395" duration="9461000" />
+      <workItem from="1545747174395" duration="10239000" />
+      <workItem from="1545911675446" duration="4327000" />
+      <workItem from="1545916375397" duration="96000" />
+      <workItem from="1545916522137" duration="2653000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28684000" />
+    <option name="totallyTimeSpent" value="36538000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="25" width="1877" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2168214" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2244675" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -242,10 +275,10 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32937366" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3297414" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32829374" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="CMake" order="12" weight="0.3297414" />
+      <window_info anchor="bottom" id="CMake" order="12" weight="0.32937366" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -273,50 +306,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Net.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="162">
-          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
-          <folding>
-            <element signature="e#85#103#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="108">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///usr/include/cxxopts.hpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="1051" selection-start-line="1051" selection-end-line="1051" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Net.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22">
+        <state relative-caret-position="15">
           <caret line="1" column="3" selection-start-line="1" selection-start-column="3" selection-end-line="1" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TrainingData.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="52" column="70" selection-start-line="52" selection-start-column="70" selection-end-line="52" selection-end-column="70" />
-          <folding>
-            <element signature="e#103#120#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TrainingData.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
+        <state relative-caret-position="2310">
           <caret line="154" column="34" selection-start-line="154" selection-start-column="34" selection-end-line="154" selection-end-column="34" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -324,21 +323,62 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ccsm-train.cpp">
+    <entry file="file:///usr/include/cxxopts.hpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="339">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
+        <state relative-caret-position="15765">
+          <caret line="1051" selection-start-line="1051" selection-end-line="1051" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TrainingData.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="780">
+          <caret line="52" column="70" selection-start-line="52" selection-start-column="70" selection-end-line="52" selection-end-column="70" />
           <folding>
-            <element signature="e#0#19#0" expanded="true" />
-            <element signature="e#2651#2654#0" expanded="true" />
+            <element signature="e#103#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Net.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="9" column="11" selection-start-line="9" selection-start-column="11" selection-end-line="9" selection-end-column="11" />
+          <folding>
+            <element signature="e#85#103#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ccsm-track.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret lean-forward="true" />
+        <state relative-caret-position="260">
+          <caret line="13" column="26" selection-start-line="13" selection-start-column="26" selection-end-line="13" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cmake-build-debug/FindSFML.cmake">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-585" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ccsm-train.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="960">
+          <caret line="66" column="7" selection-start-line="66" selection-start-column="7" selection-end-line="66" selection-end-column="7" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CMakeLists.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="25" selection-start-line="5" selection-start-column="25" selection-end-line="5" selection-end-column="25" />
         </state>
       </provider>
     </entry>

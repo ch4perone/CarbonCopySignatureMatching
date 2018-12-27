@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-track.cpp
+iostream
+-
+cxxopts.hpp
+-
+SFML/Graphics.hpp
+-
+

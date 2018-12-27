@@ -111,17 +111,30 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named CarbonCopySignatureMatching
+# Target rules for targets named ccsm-train
 
 # Build rule for target.
-CarbonCopySignatureMatching: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 CarbonCopySignatureMatching
-.PHONY : CarbonCopySignatureMatching
+ccsm-train: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ccsm-train
+.PHONY : ccsm-train
 
 # fast build rule for target.
-CarbonCopySignatureMatching/fast:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/build
-.PHONY : CarbonCopySignatureMatching/fast
+ccsm-train/fast:
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/build
+.PHONY : ccsm-train/fast
+
+#=============================================================================
+# Target rules for targets named ccsm-track
+
+# Build rule for target.
+ccsm-track: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ccsm-track
+.PHONY : ccsm-track
+
+# fast build rule for target.
+ccsm-track/fast:
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/build
+.PHONY : ccsm-track/fast
 
 Net.o: Net.cpp.o
 
@@ -129,7 +142,7 @@ Net.o: Net.cpp.o
 
 # target to build an object file
 Net.cpp.o:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/Net.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Net.cpp.o
 .PHONY : Net.cpp.o
 
 Net.i: Net.cpp.i
@@ -138,7 +151,7 @@ Net.i: Net.cpp.i
 
 # target to preprocess a source file
 Net.cpp.i:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/Net.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Net.cpp.i
 .PHONY : Net.cpp.i
 
 Net.s: Net.cpp.s
@@ -147,7 +160,7 @@ Net.s: Net.cpp.s
 
 # target to generate assembly for a file
 Net.cpp.s:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/Net.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Net.cpp.s
 .PHONY : Net.cpp.s
 
 Neuron.o: Neuron.cpp.o
@@ -156,7 +169,7 @@ Neuron.o: Neuron.cpp.o
 
 # target to build an object file
 Neuron.cpp.o:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/Neuron.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.o
 .PHONY : Neuron.cpp.o
 
 Neuron.i: Neuron.cpp.i
@@ -165,7 +178,7 @@ Neuron.i: Neuron.cpp.i
 
 # target to preprocess a source file
 Neuron.cpp.i:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/Neuron.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.i
 .PHONY : Neuron.cpp.i
 
 Neuron.s: Neuron.cpp.s
@@ -174,7 +187,7 @@ Neuron.s: Neuron.cpp.s
 
 # target to generate assembly for a file
 Neuron.cpp.s:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/Neuron.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.s
 .PHONY : Neuron.cpp.s
 
 TrainingData.o: TrainingData.cpp.o
@@ -183,7 +196,7 @@ TrainingData.o: TrainingData.cpp.o
 
 # target to build an object file
 TrainingData.cpp.o:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.o
 .PHONY : TrainingData.cpp.o
 
 TrainingData.i: TrainingData.cpp.i
@@ -192,7 +205,7 @@ TrainingData.i: TrainingData.cpp.i
 
 # target to preprocess a source file
 TrainingData.cpp.i:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.i
 .PHONY : TrainingData.cpp.i
 
 TrainingData.s: TrainingData.cpp.s
@@ -201,7 +214,7 @@ TrainingData.s: TrainingData.cpp.s
 
 # target to generate assembly for a file
 TrainingData.cpp.s:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/TrainingData.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.s
 .PHONY : TrainingData.cpp.s
 
 ccsm-track.o: ccsm-track.cpp.o
@@ -210,7 +223,7 @@ ccsm-track.o: ccsm-track.cpp.o
 
 # target to build an object file
 ccsm-track.cpp.o:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/ccsm-track.cpp.o
 .PHONY : ccsm-track.cpp.o
 
 ccsm-track.i: ccsm-track.cpp.i
@@ -219,7 +232,7 @@ ccsm-track.i: ccsm-track.cpp.i
 
 # target to preprocess a source file
 ccsm-track.cpp.i:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/ccsm-track.cpp.i
 .PHONY : ccsm-track.cpp.i
 
 ccsm-track.s: ccsm-track.cpp.s
@@ -228,7 +241,7 @@ ccsm-track.s: ccsm-track.cpp.s
 
 # target to generate assembly for a file
 ccsm-track.cpp.s:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-track.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/ccsm-track.cpp.s
 .PHONY : ccsm-track.cpp.s
 
 ccsm-train.o: ccsm-train.cpp.o
@@ -237,7 +250,7 @@ ccsm-train.o: ccsm-train.cpp.o
 
 # target to build an object file
 ccsm-train.cpp.o:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-train.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o
 .PHONY : ccsm-train.cpp.o
 
 ccsm-train.i: ccsm-train.cpp.i
@@ -246,7 +259,7 @@ ccsm-train.i: ccsm-train.cpp.i
 
 # target to preprocess a source file
 ccsm-train.cpp.i:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-train.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/ccsm-train.cpp.i
 .PHONY : ccsm-train.cpp.i
 
 ccsm-train.s: ccsm-train.cpp.s
@@ -255,7 +268,7 @@ ccsm-train.s: ccsm-train.cpp.s
 
 # target to generate assembly for a file
 ccsm-train.cpp.s:
-	$(MAKE) -f CMakeFiles/CarbonCopySignatureMatching.dir/build.make CMakeFiles/CarbonCopySignatureMatching.dir/ccsm-train.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/ccsm-train.cpp.s
 .PHONY : ccsm-train.cpp.s
 
 # Help Target
@@ -265,8 +278,9 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
-	@echo "... CarbonCopySignatureMatching"
 	@echo "... edit_cache"
+	@echo "... ccsm-train"
+	@echo "... ccsm-track"
 	@echo "... Net.o"
 	@echo "... Net.i"
 	@echo "... Net.s"
