@@ -4,6 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.cpp" "/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/ccsm-track.dir/TrackPad.cpp.o"
   "/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-track.cpp" "/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/ccsm-track.dir/ccsm-track.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")

@@ -1,7 +1,8 @@
 #include <iostream>
 #include <cxxopts.hpp>
 #include <SFML/Graphics.hpp>
-
+#include <fstream>
+#include "TrackPad.h"
 
 //compile: g++ -c ccsm-track.cpp
 //then: g++ ccsm-track.o -o ccsm-track -lsfml-graphics -lsfml-window -lsfml-system
@@ -9,7 +10,8 @@
 using namespace std;
 using namespace sf;
 
-typedef vector<Vector2f> Track;
+
+
 
 cxxopts::ParseResult parseTrackingArguments(int argc, char **argv) {
     cxxopts::Options options("ccsm-track", "Carbon Copy Signature Matching - record a specific signature by tracking the mouse movement");
@@ -40,65 +42,25 @@ cxxopts::ParseResult parseTrackingArguments(int argc, char **argv) {
 
 }
 
-void drawDefaultText(RenderWindow &window, Font &font, Color color = Color::Cyan) {
-    sf::Text result_prompt;
-    result_prompt.setFont(font);
-    result_prompt.setCharacterSize(14);
-    result_prompt.setPosition(0, 0);
-    result_prompt.setString("Left Mouse Button    |  Right Mouse Button  |  ESC\n"
-                            "> Track Mouse        | > Confirm Signature  | > Discard Signature");
-    result_prompt.setFillColor(color);
-    window.draw(result_prompt);
-}
-
-void drawTrackCount(RenderWindow &window, Font &font, vector<Track> &trackList, Color color = Color::Cyan) {
-    sf::Text result_prompt;
-    result_prompt.setFont(font);
-    result_prompt.setCharacterSize(14);
-    result_prompt.setPosition(500 - 2 * result_prompt.getCharacterSize(), 500 - result_prompt.getCharacterSize() - 5);
-    result_prompt.setString(to_string(trackList.size()));
-    result_prompt.setFillColor(color);
-    window.draw(result_prompt);
-}
-
-void drawInfoText(RenderWindow &window, Font &font, string info, Color color = Color::Cyan) {
-    cout << info << endl;
-    window.clear(sf::Color::Black);
-    drawDefaultText(window, font);
-
-    sf::Text result_prompt;
-    result_prompt.setFont(font);
-    result_prompt.setCharacterSize(14);
-    result_prompt.setPosition(0, 500 - result_prompt.getCharacterSize() - 5);
-    result_prompt.setString(info);
-    result_prompt.setFillColor(color);
-    window.draw(result_prompt);
-}
-
-void trackMouseMovement(Track &currentTrack, RenderWindow &window) {
-    Vector2f mousePos = static_cast<Vector2f>(Mouse::getPosition(window));
-
-    currentTrack.push_back(mousePos);
-
-    CircleShape shape(2.f);
-    shape.setPosition(mousePos);
-    window.draw(shape);
-    window.display();
-}
-
-void storeTrack(vector<Track> &trackList, Track &currentTrack) {
-    trackList.push_back(currentTrack);
-    currentTrack.clear();
-}
-
 bool saveTrackListToFile(vector<Track> &trackList, string &file_path) {
     if (trackList.empty()) {
         cout << "No records are saved: Empty Track List" << endl;
         return false;
     }
-    cout << "TODO: " << "Saving " << trackList.size() << " signature tracks to: " << file_path << endl;
-
-
+    cout << "Saving " << trackList.size() << " signature tracks to: " << file_path << endl;
+    fstream file(file_path, ios::app);
+    if (!file.good()) {
+        cout << file_path << " does not work out" << endl;
+        return false;
+    }
+    for (Track track : trackList) {
+        for (Vector2f point : track) {
+            file << point.x << " " << point.y << " ";
+        }
+        file << endl;
+    }
+    cout << "done successfully" << endl;
+    return true;
 }
 
 int main(int argc, char** argv) {
@@ -109,54 +71,40 @@ int main(int argc, char** argv) {
     /*
      * Window setup
      */
-    RenderWindow window(VideoMode(500, 500), "Tracking Signatures!");
-    window.clear(Color::Black);
-    Font font;
-    if (!font.loadFromFile("./UbuntuMono-B.ttf"))
-    {
-        std::cout << "Error loading font\n" ;
-    }
-    drawDefaultText(window, font);
-    window.display();
+    string window_name = "Track Signatures for ";
+    window_name += args["name"].as<string>();
+
+    RenderWindow window(VideoMode(500, 500), window_name);
+    TrackPad trackPad(window);
 
     /*
      * With open window
      */
-
-    Track track;
-    vector<Track> trackList;
-    bool onTrack = false;
-
     cout << "Launch ccsm-track application" << endl;
     while (window.isOpen())
     {
+
         Event event;
         while (window.pollEvent(event)) {
-
             switch (event.type) {
-                case Event::Closed:
+                case Event::Closed: {
                     path = "./signatures/";
                     path += args["name"].as<string>();
                     path += ".sgn.tsv";
-                    saveTrackListToFile(trackList, path);
+                    vector<Track> tracks = trackPad.getStoredTracks();
+                    saveTrackListToFile(tracks, path);
                     window.close();
                     break;
-
-                case Event::MouseButtonPressed:
+                }
+                case Event::MouseButtonPressed: {
                     if (event.mouseButton.button == Mouse::Left) {
-                        if(!onTrack) {
-                            drawInfoText(window, font, "Tracking ..");
-                            drawTrackCount(window, font, trackList);
-                            window.display();
-                            onTrack = true;
-                        }
 
                         Event releaseEvent;
                         bool mouseReleased = false;
 
                         while (!mouseReleased) {
 
-                            trackMouseMovement(track, window);
+                            trackPad.trackMouseMovement();
 
                             //Catch MouseRelease
                             while (window.pollEvent(releaseEvent)) {
@@ -165,36 +113,19 @@ int main(int argc, char** argv) {
                                 }
                             }
                         }
-                    } else if (event.mouseButton.button == Mouse::Button::Right && onTrack) {
-                        storeTrack(trackList, track);
-                        drawInfoText(window, font, "Track Stored.");
-                        drawTrackCount(window, font, trackList);
-                        window.display();
-                        onTrack = false;
-                    }
-
-                    break;
-
-                case Event::KeyPressed:
-                    if(event.key.code == Keyboard::Escape) {
-                        if(onTrack) {
-                            track.clear();
-                            drawInfoText(window, font, "Track Discarded.", Color::Red);
-                            drawTrackCount(window, font, trackList);
-                            window.display();
-                            onTrack = false;
-                        } else if(!trackList.empty()) {
-                            trackList.pop_back();
-                            drawInfoText(window, font, "Previous Track Discarded!", Color::Red);
-                            drawTrackCount(window, font, trackList);
-                            window.display();
-                        }
+                    } else if (event.mouseButton.button == Mouse::Button::Right && trackPad.isTrackingMouse()) {
+                        trackPad.storeTrack();
                     }
                     break;
-
+                }
+                case Event::KeyPressed: {
+                    if (event.key.code == Keyboard::Escape) {
+                        trackPad.discardTrack();
+                    }
+                    break;
+                }
                 default:
                     break;
-
             }
         }
     }

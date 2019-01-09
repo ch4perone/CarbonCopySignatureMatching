@@ -3,6 +3,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/ccsm-train.dir/Neuron.cpp.o"
   "CMakeFiles/ccsm-train.dir/Net.cpp.o"
   "CMakeFiles/ccsm-train.dir/TrainingData.cpp.o"
+  "CMakeFiles/ccsm-train.dir/TrackPad.cpp.o"
   "ccsm-train.pdb"
   "ccsm-train"
 )

@@ -27,6 +27,52 @@
 					<DistClean command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
+			<Target title="ccsm-view">
+				<Option output="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/ccsm-view" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 ccsm-view"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ccsm-view/fast">
+				<Option output="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/ccsm-view" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/7"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/7"/>
+					<Add directory="/usr/include/c++/7/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 ccsm-view/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
 			<Target title="edit_cache">
 				<Option working_dir="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug"/>
 				<Option type="4"/>
@@ -142,6 +188,16 @@
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Neuron.h">
 			<Option target="ccsm-train"/>
 		</Unit>
+		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.cpp">
+			<Option target="ccsm-view"/>
+			<Option target="ccsm-train"/>
+			<Option target="ccsm-track"/>
+		</Unit>
+		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.h">
+			<Option target="ccsm-view"/>
+			<Option target="ccsm-train"/>
+			<Option target="ccsm-track"/>
+		</Unit>
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.cpp">
 			<Option target="ccsm-train"/>
 		</Unit>
@@ -153,6 +209,9 @@
 		</Unit>
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-train.cpp">
 			<Option target="ccsm-train"/>
+		</Unit>
+		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-view.cpp">
+			<Option target="ccsm-view"/>
 		</Unit>
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>

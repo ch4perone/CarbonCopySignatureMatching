@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/ccsm-track.dir/ccsm-track.cpp.o"
+  "CMakeFiles/ccsm-track.dir/TrackPad.cpp.o"
   "ccsm-track.pdb"
   "ccsm-track"
 )

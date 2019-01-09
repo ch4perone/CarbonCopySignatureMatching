@@ -3,8 +3,9 @@ project(CarbonCopySignatureMatching)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(ccsm-train ccsm-train.cpp Neuron.cpp Neuron.h Net.cpp Net.h TrainingData.cpp TrainingData.h)
-add_executable(ccsm-track ccsm-track.cpp)
+add_executable(ccsm-train ccsm-train.cpp Neuron.cpp Neuron.h Net.cpp Net.h TrainingData.cpp TrainingData.h TrackPad.cpp TrackPad.h)
+add_executable(ccsm-track ccsm-track.cpp TrackPad.cpp TrackPad.h)
+add_executable(ccsm-view ccsm-view.cpp TrackPad.cpp TrackPad.h)
 
 # Detect and add SFML
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake-build-debug" ${CMAKE_MODULE_PATH})

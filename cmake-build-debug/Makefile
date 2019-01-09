@@ -111,6 +111,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named ccsm-view
+
+# Build rule for target.
+ccsm-view: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ccsm-view
+.PHONY : ccsm-view
+
+# fast build rule for target.
+ccsm-view/fast:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/build
+.PHONY : ccsm-view/fast
+
+#=============================================================================
 # Target rules for targets named ccsm-train
 
 # Build rule for target.
@@ -189,6 +202,39 @@ Neuron.s: Neuron.cpp.s
 Neuron.cpp.s:
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.s
 .PHONY : Neuron.cpp.s
+
+TrackPad.o: TrackPad.cpp.o
+
+.PHONY : TrackPad.o
+
+# target to build an object file
+TrackPad.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrackPad.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrackPad.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/TrackPad.cpp.o
+.PHONY : TrackPad.cpp.o
+
+TrackPad.i: TrackPad.cpp.i
+
+.PHONY : TrackPad.i
+
+# target to preprocess a source file
+TrackPad.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrackPad.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrackPad.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/TrackPad.cpp.i
+.PHONY : TrackPad.cpp.i
+
+TrackPad.s: TrackPad.cpp.s
+
+.PHONY : TrackPad.s
+
+# target to generate assembly for a file
+TrackPad.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrackPad.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrackPad.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/TrackPad.cpp.s
+.PHONY : TrackPad.cpp.s
 
 TrainingData.o: TrainingData.cpp.o
 
@@ -271,6 +317,33 @@ ccsm-train.cpp.s:
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/ccsm-train.cpp.s
 .PHONY : ccsm-train.cpp.s
 
+ccsm-view.o: ccsm-view.cpp.o
+
+.PHONY : ccsm-view.o
+
+# target to build an object file
+ccsm-view.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/ccsm-view.cpp.o
+.PHONY : ccsm-view.cpp.o
+
+ccsm-view.i: ccsm-view.cpp.i
+
+.PHONY : ccsm-view.i
+
+# target to preprocess a source file
+ccsm-view.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/ccsm-view.cpp.i
+.PHONY : ccsm-view.cpp.i
+
+ccsm-view.s: ccsm-view.cpp.s
+
+.PHONY : ccsm-view.s
+
+# target to generate assembly for a file
+ccsm-view.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/ccsm-view.cpp.s
+.PHONY : ccsm-view.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -278,6 +351,7 @@ help:
 	@echo "... clean"
 	@echo "... depend"
 	@echo "... rebuild_cache"
+	@echo "... ccsm-view"
 	@echo "... edit_cache"
 	@echo "... ccsm-train"
 	@echo "... ccsm-track"
@@ -287,6 +361,9 @@ help:
 	@echo "... Neuron.o"
 	@echo "... Neuron.i"
 	@echo "... Neuron.s"
+	@echo "... TrackPad.o"
+	@echo "... TrackPad.i"
+	@echo "... TrackPad.s"
 	@echo "... TrainingData.o"
 	@echo "... TrainingData.i"
 	@echo "... TrainingData.s"
@@ -296,6 +373,9 @@ help:
 	@echo "... ccsm-train.o"
 	@echo "... ccsm-train.i"
 	@echo "... ccsm-train.s"
+	@echo "... ccsm-view.o"
+	@echo "... ccsm-view.i"
+	@echo "... ccsm-view.s"
 .PHONY : help
 
 
