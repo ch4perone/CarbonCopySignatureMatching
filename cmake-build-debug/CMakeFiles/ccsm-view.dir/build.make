@@ -34,10 +34,10 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /snap/clion/57/bin/cmake/linux/bin/cmake
+CMAKE_COMMAND = /snap/clion/58/bin/cmake/linux/bin/cmake
 
 # The command to remove a file.
-RM = /snap/clion/57/bin/cmake/linux/bin/cmake -E remove -f
+RM = /snap/clion/58/bin/cmake/linux/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
@@ -94,6 +94,11 @@ ccsm__view_EXTERNAL_OBJECTS =
 ccsm-view: CMakeFiles/ccsm-view.dir/ccsm-view.cpp.o
 ccsm-view: CMakeFiles/ccsm-view.dir/TrackPad.cpp.o
 ccsm-view: CMakeFiles/ccsm-view.dir/build.make
+ccsm-view: /usr/lib/x86_64-linux-gnu/libsfml-system.so
+ccsm-view: /usr/lib/x86_64-linux-gnu/libsfml-window.so
+ccsm-view: /usr/lib/x86_64-linux-gnu/libsfml-graphics.so
+ccsm-view: /usr/lib/x86_64-linux-gnu/libsfml-network.so
+ccsm-view: /usr/lib/x86_64-linux-gnu/libsfml-audio.so
 ccsm-view: CMakeFiles/ccsm-view.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking CXX executable ccsm-view"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/ccsm-view.dir/link.txt --verbose=$(VERBOSE)

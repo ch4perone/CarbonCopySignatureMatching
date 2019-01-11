@@ -15,25 +15,42 @@ using namespace sf;
 typedef vector<Vector2f> Track;
 
 class TrackPad {
+private:
+    RenderWindow &window;
+    Font font;
+    CircleShape dot;
+
+    Track track;
+    vector<Track> trackList;
+    int index;
+
+    bool isTracking = false;
+    string defaultText;
+
 public:
-    explicit TrackPad(RenderWindow &window);
+    TrackPad(RenderWindow &window);
+    TrackPad(RenderWindow &window, string defaultText);
+
+    bool loadTrackListFromFile(string path);
+    bool setActiveTrackByNumber(int num);
+    bool next();
+    bool previous();
+
+    void setDefaultText(string text);
     void drawDefaultText(Color color = COLOR_TEXT);
     void drawTrackCount(Color color = COLOR_TEXT);
+    void drawTrackIndex(Color color = COLOR_TEXT);
     void drawInfoText(string info, Color color = COLOR_TEXT);
     void trackMouseMovement();
     void storeTrack();
+
+    void stopTracking();
+    void drawCurrentTrack();
 
     void discardTrack();
     bool isTrackingMouse();
 
     vector<Track> getStoredTracks();
-private:
-    RenderWindow &window;
-    Font font;
-
-    Track track;
-    vector<Track> trackList;
-    bool isTracking = false;
 };
 
 

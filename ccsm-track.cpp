@@ -71,11 +71,12 @@ int main(int argc, char** argv) {
     /*
      * Window setup
      */
-    string window_name = "Track Signatures for ";
-    window_name += args["name"].as<string>();
+    string window_name = "Track Signatures for " + args["name"].as<string>();
 
-    RenderWindow window(VideoMode(500, 500), window_name);
-    TrackPad trackPad(window);
+    RenderWindow window(VideoMode(1000, 1000), window_name);
+    window.setFramerateLimit(120);
+    TrackPad trackPad(window, "Left Mouse Button    |  Right Mouse Button  |  ESC\n"
+                              "> Track Mouse        | > Confirm Signature  | > Discard Signature");
 
     /*
      * With open window
@@ -83,6 +84,7 @@ int main(int argc, char** argv) {
     cout << "Launch ccsm-track application" << endl;
     while (window.isOpen())
     {
+
 
         Event event;
         while (window.pollEvent(event)) {
@@ -98,23 +100,16 @@ int main(int argc, char** argv) {
                 }
                 case Event::MouseButtonPressed: {
                     if (event.mouseButton.button == Mouse::Left) {
-
-                        Event releaseEvent;
-                        bool mouseReleased = false;
-
-                        while (!mouseReleased) {
-
-                            trackPad.trackMouseMovement();
-
-                            //Catch MouseRelease
-                            while (window.pollEvent(releaseEvent)) {
-                                if (releaseEvent.type == Event::MouseButtonReleased) {
-                                    mouseReleased = true;
-                                }
-                            }
-                        }
-                    } else if (event.mouseButton.button == Mouse::Button::Right && trackPad.isTrackingMouse()) {
+                        trackPad.trackMouseMovement();
+                    } else if (event.mouseButton.button == Mouse::Button::Right) {
                         trackPad.storeTrack();
+                    }
+                    break;
+                }
+                case Event::MouseButtonReleased: {
+                    //track Pad
+                    if(event.mouseButton.button == Mouse::Left) {
+                        trackPad.stopTracking();
                     }
                     break;
                 }
@@ -127,7 +122,12 @@ int main(int argc, char** argv) {
                 default:
                     break;
             }
+
+            if (trackPad.isTrackingMouse()) {
+                trackPad.trackMouseMovement();
+            }
         }
+
     }
 
 }
