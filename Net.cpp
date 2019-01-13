@@ -1,10 +1,71 @@
 #include <cassert>
 #include <cmath>
+#include <iostream>
+#include <fstream>
 #include "Net.h"
 
 
-Net::Net(vector<unsigned> &topology, vector<vector<vector<double> > > &weight_cube) {
+Net::Net(int resolution, int numClasses, int width, int depth) {
+    vector<unsigned> topology(depth + 2, width);
+    topology[0] = resolution * 2;
+    topology[topology.size() - 1] = numClasses;
+    this->topology = topology;
 
+    auto numLayers = static_cast<unsigned int>(topology.size());
+
+    for (int indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
+        m_layers.emplace_back();
+        int numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
+
+        for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
+            m_layers.back().push_back(Neuron(numOutputs, indexNeuron));
+        }
+        m_layers.back().back().setOutputVal(1.0);
+    }
+
+}
+
+Net::Net(string source) {
+
+    vector<unsigned> topology;
+    vector<vector <vector<double> > > weight_cube;
+    if(!loadWeightsFromSource(source, topology, weight_cube)) {
+        cout << "Error: Loading network from source " << source << endl;
+        exit(1);
+    }
+
+
+    this->topology = topology;
+    unsigned numLayers = (unsigned int) topology.size();
+
+    for (unsigned indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
+        m_layers.push_back(Layer());
+        unsigned numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
+
+        for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
+            m_layers.back().push_back(Neuron(numOutputs, indexNeuron, weight_cube[indexLayer][indexNeuron]));
+        }
+        m_layers.back().back().setOutputVal(1.0);
+    }
+}
+
+Net::Net(vector<unsigned> &topology) {
+    this->topology = topology;
+    auto numLayers = static_cast<unsigned int>(topology.size());
+
+    for (unsigned indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
+        m_layers.push_back(Layer());
+        unsigned numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
+
+        for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
+            m_layers.back().push_back(Neuron(numOutputs, indexNeuron));
+        }
+        m_layers.back().back().setOutputVal(1.0);
+    }
+}
+
+Net::Net(vector<unsigned> &topology, vector<vector<vector<double> > > &weight_cube) {
+    this->topology = topology;
     unsigned numLayers = (unsigned int) topology.size();
 
     for (unsigned indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
@@ -34,7 +95,7 @@ void Net::feedForward(const vector<double> &inputVals) {
     }
 }
 
-void Net::backProp(const vector<double> &targetVals) {
+void Net::backPropagate(const vector<double> &targetVals) {
     //Calculate overall net error (RMS of output neuron errors)
     Layer &outputLayer = m_layers.back();
     m_error  = 0.0;
@@ -46,7 +107,7 @@ void Net::backProp(const vector<double> &targetVals) {
 
     m_error /= outputLayer.size() - 1;
     m_error = (double) sqrt(m_error); //RMS
-
+    cout << m_error << endl;
     //Give an insight on average error
     m_recentAverageError = (m_recentAverageError * m_recentAverageSmoothingFactor + m_error)/(m_recentAverageSmoothingFactor + 1);
 
@@ -114,3 +175,92 @@ stringstream Net::getNetStructure() const {
     return ss_topology;
 }
 
+void Net::printNetworkStructureVisualization() {
+    string dots = "\t";
+    string nums = "\t";
+    for (int j = 0; j < topology.size(); ++j) {
+        dots += ".    ";
+    }
+    dots+="\n";
+
+    for (unsigned i : topology) {
+        nums += to_string(i) + "----";
+    }
+    nums = nums.substr(0, nums.length() - 4) + "\n";
+
+    cout << "Network structure:" << endl;
+    cout << dots << dots << dots << nums << dots << dots << dots << endl;
+}
+
+bool Net::loadWeightsFromSource(string &path, vector<unsigned> &topology, vector<vector <vector<double> > > &weight_cube) {
+    ifstream f(path, ios::in);
+
+
+
+    //get topology
+    string line;
+    string label;
+
+    getline(f, line);
+    stringstream ss1(line);
+
+    ss1 >> label;
+
+    if(f.eof() || label.compare("topology:") != 0)
+        return false;
+    while(!ss1.eof()) {
+        double n;
+        ss1 >> n;
+        topology.push_back(n);
+    }
+
+    //get weights for every neuron
+    int i,j;
+    vector<vector<double> > weight_layer_matrix;
+    for(int i = 0, j = 0; i < topology.size() - 1; ++j) {
+        getline(f, line);
+        stringstream ss2(line);
+
+        ss2 >> label;
+
+        string expected_label = "[";
+        expected_label+=to_string(i);
+        expected_label+=",";
+        expected_label+=to_string(j);
+        expected_label+="]";
+
+        if(f.eof() || label.compare(expected_label) != 0) {
+            return false;
+        //abort();
+        }
+
+
+        double c_weight;
+        vector<double> weights_of_c_neuron;
+        while(ss2 >> c_weight) {
+            weights_of_c_neuron.push_back(c_weight);
+        }
+
+        if(weights_of_c_neuron.size() != topology[i+1])
+            return false;
+
+        weight_layer_matrix.push_back(weights_of_c_neuron);
+
+        if(j == topology[i]) {
+            weight_cube.push_back(weight_layer_matrix);
+            weight_layer_matrix.clear();
+            j = -1;
+            ++i;
+        }
+    }
+    f.close();
+
+    return true;
+
+    //net = new Net(topology, weight_cube);
+
+}
+
+vector<unsigned> Net::getTopology() {
+    return topology;
+}

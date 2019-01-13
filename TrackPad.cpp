@@ -215,3 +215,11 @@ bool TrackPad::previous() {
     track = trackList[index];
     return true;
 }
+
+Track TrackPad::getCurrentTrack() {
+    return track;
+}
+
+void TrackPad::clearTrack() {
+    track.clear();
+}

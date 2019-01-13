@@ -1,6 +1,9 @@
 #include <iostream>
 #include <cxxopts.hpp>
+#include <cassert>
+#include <fstream>
 #include "TrainingData.h"
+#include "Net.h"
 
 /*
  * This is CCSM in its full glory
@@ -27,7 +30,7 @@ cxxopts::ParseResult parseArguments(int argc, char **argv) {
                 ("dropout", "Drop out proportion of neurons for training [default: 0.0]", cxxopts::value<float>())
                 ("batchNormalization","Batches will probably not be implemented soon :D");
         options.add_options("Network")
-                ("resolution","Define data resolution (data points used as network input), equivalent to input layer width of the network (plus an additional bias-neuron)", cxxopts::value<int>())
+                ("resolution","Define data resolution (data points used as network input), equivalent to half the input layer width of the network (plus an additional bias-neuron)", cxxopts::value<int>())
                 ("depth", "Number of dense layer between input and output layers", cxxopts::value<int>())
                 ("width", "Number of neurons per dense layer (including bias-neurons)", cxxopts::value<int>());
         options.add_options("Bagging (bootstrapping and aggregation)")
@@ -45,6 +48,18 @@ cxxopts::ParseResult parseArguments(int argc, char **argv) {
         }
         if (!result.count("resolution")) {
             cout << "error parsing options: Argument missing: " << " --resolution" << endl;
+            exit(1);
+        }
+        if (!result.count("width")) {
+            cout << "error parsing options: Argument missing: " << " --width" << endl;
+            exit(1);
+        }
+        if (!result.count("depth")) {
+            cout << "error parsing options: Argument missing: " << " --depth" << endl;
+            exit(1);
+        }
+        if (!result.count("out")) {
+            cout << "error parsing options: Argument missing: " << " --out" << endl;
             exit(1);
         }
         return result;
@@ -72,15 +87,20 @@ int main(int argc, char** argv) {
 
 
     // Train network(s)
-    if (!args.count("multiples")) {
-        //Generate a single initial neural network
+    if (!args.count("multiples")) {         //Generate a single initial neural network
 
         //Load training data
         cout << "Load training data" << endl;
-        TrainingData trainingData("../signatures", args["resolution"].as<int>());
+        TrainingData trainingData("./signatures", args["resolution"].as<int>());
         trainingData.shuffleTrainingData();
         auto trainTestSplit = setDefault_readInputValue<float>(0.8f, "trainTestSplit", args);
-        trainingData.splitTestTrainingData(trainTestSplit);
+        trainingData.splitTestTrainingData(trainTestSplit); //TODO
+
+        //Setup neural network
+        cout << "Construct randomized neural network" << endl;
+        int numClasses = static_cast<int>(trainingData.getFiles().size());
+        Net ANN(args["resolution"].as<int>(), numClasses, args["width"].as<int>(), args["depth"].as<int>());
+        ANN.printNetworkStructureVisualization();
 
         //Train network
         int epochs = setDefault_readInputValue<int>(100, "epochs", args);
@@ -88,19 +108,33 @@ int main(int argc, char** argv) {
         for (int e = 1; e <= epochs; ++e) {
 
             //Train entire epoch
+            trainingData.restartTraining();
             while(trainingData.getTrainingProgress() < 1) {
 
-                trainingData.flushTrainingProgressToConsole(e, epochs);
+                //trainingData.flushTrainingProgressToConsole(e, epochs);
                 DataPiece input = trainingData.getNextTrainingDataPiece();
-                //TODO train network with input.X and input.Y
+                vector<double> prediction;
+
+                ANN.feedForward(input.X);
+                ANN.getResults(prediction);
+                ANN.backPropagate(input.Y);
+
             }
             //Validate test and training accuracy at epoch end
+            /*
+            trainingData.restartTesting();
             while(trainingData.getTestProgress() < 1) {
                 //TODO read up on softmax and test/validation error and accuracy
-            }
+            }*/
+
 
         }
-        cout << endl;
+        cout << endl << "Network successfully trained" << endl;
+        //dump final network structure
+        stringstream ss = ANN.getNetStructure();
+        ofstream f(args["out"].as<string>());
+        f << ss.str();
+        f.close();
 
     }
     else {

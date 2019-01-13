@@ -2,55 +2,57 @@
 #include <fstream>
 #include <algorithm>
 #include <iostream>
+#include <cmath>
+#include <experimental/filesystem>
+#include <dirent.h>
+#include <sys/types.h>
+#include <cassert>
 #include "TrainingData.h"
 
 
+TrainingData::TrainingData(int resolution) {
+    this->resolution = resolution;
+}
+
 TrainingData::TrainingData(string path, int resolution) {
-    //todo: load all files of type .signature.tsv
-    vector<string> files;
+    files = getFilesInDirectory(path, ".sgn.tsv");
+    sort(files.begin(), files.end());
+    
     this->resolution = resolution;
 
-    for(string file : files) {
+    for(int i = 0; i < files.size(); ++i) {
+        cout << files[i] << endl;
+        //init output vector
+        vector<double> Y(files.size(), 0);
+        Y[i] = 1.f;
+
+        string file = files[i];
         ifstream f(file, ios::in);
         while(!f.eof()) {
             string line;
             getline(f, line);
 
-            DataPiece dp = generateDataPiece(line);
-            trainingPieces.push_back(dp);
+            stringstream ss(line);
+            vector<pair<int, int>> track;
+            int x,y;
+            while(ss >> x >> y) {
+                track.emplace_back(x,y);
+            }
+            if(!track.empty()) { //Drop empty lines
+                DataPiece dp = generateDataPiece(track);
+                dp.setY(Y);
+
+                assert(dp.X.size() == resolution * 2);
+                trainingPieces.push_back(dp);
+            }
         }
     }
 
 }
+
 
 TrainingData::~TrainingData() {
     //Maybe clean up all DataPieces
-}
-
-TrainingData::TrainingData(const vector<string> filename_v) {
-    total_inputNum = (int) filename_v.size() - 1;
-    for (string path : filename_v) {
-        m_trainingDataPaths.push_back(path);
-        ifstream f(path, ios::in);
-        matrix input_matrix;
-        while (!f.eof()) {
-            vector<double> input_line;
-
-            string line;
-            getline(f, line);
-
-            stringstream ss(line);
-
-
-            double oneValue;
-            while(ss >> oneValue) {
-                input_line.push_back(oneValue);
-            }
-            input_matrix.push_back(input_line);
-        }
-        input_matrix.pop_back(); //Remove empty line
-        input_cube.push_back(input_matrix);
-    }
 }
 
 void TrainingData::getTopology(vector<unsigned> &topology) {
@@ -78,6 +80,7 @@ void TrainingData::getTopology(vector<unsigned> &topology) {
 */
 }
 
+
 unsigned TrainingData::getNextInputs(vector<double> &inputVals) {
     inputVals.clear();
 
@@ -93,7 +96,6 @@ unsigned TrainingData::getNextInputs(vector<double> &inputVals) {
     return inputVals.size();
 }
 
-
 unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputVals) {
     targetOutputVals.clear();
 
@@ -105,16 +107,70 @@ unsigned TrainingData::getTargetOutputs(vector<double> &targetOutputVals) {
 
 }
 
-DataPiece TrainingData::generateDataPiece(string line) {
-    //Todo parse data piece
-    return DataPiece({1.2,1.2},{1.2, 1.2});
+DataPiece TrainingData::generateDataPiece(vector<pair<int, int>> &track) {
+    /*
+     * Crucial algorithm to extract direction vectors from pixel tracks
+     */
+
+    vector<double> inputVector;
+    while (track.size() < 2*resolution) {
+        interpolateTrack(track);
+    }
+
+    //Begin connect first coordinate
+    pair<int, int> coordinate1 = track[0];
+    int steps = static_cast<int>(track.size() / resolution);
+
+    //Connect intermediate coordinate iteratively
+    for (int i = 1; i < resolution; ++i) {
+        pair<int, int> coordinate2 = track[i*steps];
+        pair<double, double> vec = normalizedDirectionVector(coordinate1, coordinate2);
+
+        inputVector.push_back(vec.first);
+        inputVector.push_back(vec.second);
+
+        coordinate1 = coordinate2;
+    }
+
+    //Connect with last coordinate
+    pair<int, int> coordinate2 = track.back();
+    pair<double, double> vec = normalizedDirectionVector(coordinate1, coordinate2);
+    inputVector.push_back(vec.first);
+    inputVector.push_back(vec.second);
+
+
+    /*
+    for (int i = steps; i < track.size(); i+=steps) {
+        pair<int, int> coordinate2 = track[i];
+        pair<double, double> vec = normalizedDirectionVector(coordinate1, coordinate2);
+
+        inputVector.push_back(vec.first);
+        inputVector.push_back(vec.second);
+
+        coordinate1 = coordinate2;
+    }
+
+    if (track.size() % resolution == 0) {
+        pair<int, int> coordinate2 = track.back();
+        pair<double, double> vec = normalizedDirectionVector(coordinate1, coordinate2);
+
+        inputVector.push_back(vec.first);
+        inputVector.push_back(vec.second);
+    }
+
+    if (inputVector.size() == 2*resolution + 2) { //todo find out why sometimes 1 vector / 2 coord too many
+        inputVector.pop_back();
+        inputVector.pop_back();
+    }*/
+
+    return DataPiece(inputVector);
 }
 
 void TrainingData::shuffleTrainingData() {
     random_shuffle(trainingPieces.begin(), trainingPieces.end());
 }
 
-void TrainingData::splitTestTrainingData(float trainingProporting) {
+void TrainingData::splitTestTrainingData(float trainingProportion) {
     //TODO now
 }
 
@@ -142,15 +198,72 @@ void TrainingData::restartTraining() {
     trainingIndex = 0;
 }
 
+
 void TrainingData::restartTesting() {
     testIndex = 0;
 }
 
-
-
-
-
 void TrainingData::flushTrainingProgressToConsole(int currentEpoch, int maxEpoch) {
     cout << "\r[epoch " << currentEpoch << "/" << maxEpoch << "]" << " progress: " << getTrainingProgress() << flush;
     //TODO make fancy progress bar
+}
+
+void TrainingData::interpolateTrack(vector<pair<int, int>> &track) {
+    cout << "interpolate" << endl;
+    vector<pair<int, int>> interpolation;
+
+    for (int i = 0; i < track.size() - 1; ++i) {
+        pair<int, int> coordinate1 = track[i];
+        pair<int, int> coordinate2 = track[i+1];
+        pair<int, int> inbetween = {(coordinate1.first + coordinate2.first) / 2, (coordinate1.second + coordinate2.second) / 2};
+        interpolation.push_back(coordinate1);
+        interpolation.push_back(inbetween);
+    }
+    interpolation.push_back(track.back());
+    track = interpolation;
+
+}
+
+pair<double, double> TrainingData::normalizedDirectionVector(pair<int, int> coordinate1, pair<int, int> coordinate2) {
+    double x = coordinate2.first - coordinate1.first;
+    double y = coordinate2.second - coordinate1.second;
+    double length = sqrt(x*x + y*y);
+    x /= length;
+    y /= length;
+    return {x, y};
+}
+
+vector<string> TrainingData::getFilesInDirectory(string path, string extension) {
+    /*for(auto& p: experimental::filesystem::recursive_directory_iterator(path))
+    {
+        if(p.path().extension() == extension)
+            std::cout << p << '\n';
+    }
+    return vector<string>();*/
+    vector<string> filenames;
+
+    struct dirent *entry;
+    DIR *dir = opendir(path.c_str());
+
+    if (dir == NULL) {
+        cout << "Error loading files from: " << path << endl;
+        exit(1);
+    }
+    while ((entry = readdir(dir)) != NULL) {
+        string name(entry->d_name);
+        if (hasFileEnding(name, extension))
+            filenames.push_back(path+ "/" +name);
+    }
+    closedir(dir);
+
+    return filenames;
+}
+
+bool TrainingData::hasFileEnding(string &file, string &ending) {
+    if (ending.size() > file.size()) return false;
+    return std::equal(ending.rbegin(), ending.rend(), file.rbegin());
+}
+
+vector<string> TrainingData::getFiles() {
+    return files;
 }

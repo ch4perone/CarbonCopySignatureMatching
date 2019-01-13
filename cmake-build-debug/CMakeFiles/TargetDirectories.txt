@@ -1,5 +1,6 @@
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/rebuild_cache.dir
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/ccsm-view.dir
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/ccsm-test.dir
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/ccsm-train.dir
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/cmake-build-debug/CMakeFiles/ccsm-track.dir

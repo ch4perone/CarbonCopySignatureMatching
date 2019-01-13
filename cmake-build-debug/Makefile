@@ -124,6 +124,19 @@ ccsm-view/fast:
 .PHONY : ccsm-view/fast
 
 #=============================================================================
+# Target rules for targets named ccsm-test
+
+# Build rule for target.
+ccsm-test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 ccsm-test
+.PHONY : ccsm-test
+
+# fast build rule for target.
+ccsm-test/fast:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/build
+.PHONY : ccsm-test/fast
+
+#=============================================================================
 # Target rules for targets named ccsm-train
 
 # Build rule for target.
@@ -155,6 +168,7 @@ Net.o: Net.cpp.o
 
 # target to build an object file
 Net.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/Net.cpp.o
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Net.cpp.o
 .PHONY : Net.cpp.o
 
@@ -164,6 +178,7 @@ Net.i: Net.cpp.i
 
 # target to preprocess a source file
 Net.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/Net.cpp.i
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Net.cpp.i
 .PHONY : Net.cpp.i
 
@@ -173,6 +188,7 @@ Net.s: Net.cpp.s
 
 # target to generate assembly for a file
 Net.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/Net.cpp.s
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Net.cpp.s
 .PHONY : Net.cpp.s
 
@@ -182,6 +198,7 @@ Neuron.o: Neuron.cpp.o
 
 # target to build an object file
 Neuron.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/Neuron.cpp.o
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.o
 .PHONY : Neuron.cpp.o
 
@@ -191,6 +208,7 @@ Neuron.i: Neuron.cpp.i
 
 # target to preprocess a source file
 Neuron.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/Neuron.cpp.i
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.i
 .PHONY : Neuron.cpp.i
 
@@ -200,6 +218,7 @@ Neuron.s: Neuron.cpp.s
 
 # target to generate assembly for a file
 Neuron.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/Neuron.cpp.s
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/Neuron.cpp.s
 .PHONY : Neuron.cpp.s
 
@@ -210,7 +229,7 @@ TrackPad.o: TrackPad.cpp.o
 # target to build an object file
 TrackPad.cpp.o:
 	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrackPad.cpp.o
-	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrackPad.cpp.o
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrackPad.cpp.o
 	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/TrackPad.cpp.o
 .PHONY : TrackPad.cpp.o
 
@@ -221,7 +240,7 @@ TrackPad.i: TrackPad.cpp.i
 # target to preprocess a source file
 TrackPad.cpp.i:
 	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrackPad.cpp.i
-	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrackPad.cpp.i
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrackPad.cpp.i
 	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/TrackPad.cpp.i
 .PHONY : TrackPad.cpp.i
 
@@ -232,7 +251,7 @@ TrackPad.s: TrackPad.cpp.s
 # target to generate assembly for a file
 TrackPad.cpp.s:
 	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrackPad.cpp.s
-	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrackPad.cpp.s
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrackPad.cpp.s
 	$(MAKE) -f CMakeFiles/ccsm-track.dir/build.make CMakeFiles/ccsm-track.dir/TrackPad.cpp.s
 .PHONY : TrackPad.cpp.s
 
@@ -242,6 +261,7 @@ TrainingData.o: TrainingData.cpp.o
 
 # target to build an object file
 TrainingData.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrainingData.cpp.o
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.o
 .PHONY : TrainingData.cpp.o
 
@@ -251,6 +271,7 @@ TrainingData.i: TrainingData.cpp.i
 
 # target to preprocess a source file
 TrainingData.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrainingData.cpp.i
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.i
 .PHONY : TrainingData.cpp.i
 
@@ -260,8 +281,36 @@ TrainingData.s: TrainingData.cpp.s
 
 # target to generate assembly for a file
 TrainingData.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrainingData.cpp.s
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.s
 .PHONY : TrainingData.cpp.s
+
+ccsm-test.o: ccsm-test.cpp.o
+
+.PHONY : ccsm-test.o
+
+# target to build an object file
+ccsm-test.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/ccsm-test.cpp.o
+.PHONY : ccsm-test.cpp.o
+
+ccsm-test.i: ccsm-test.cpp.i
+
+.PHONY : ccsm-test.i
+
+# target to preprocess a source file
+ccsm-test.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/ccsm-test.cpp.i
+.PHONY : ccsm-test.cpp.i
+
+ccsm-test.s: ccsm-test.cpp.s
+
+.PHONY : ccsm-test.s
+
+# target to generate assembly for a file
+ccsm-test.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/ccsm-test.cpp.s
+.PHONY : ccsm-test.cpp.s
 
 ccsm-track.o: ccsm-track.cpp.o
 
@@ -353,6 +402,7 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... ccsm-view"
 	@echo "... edit_cache"
+	@echo "... ccsm-test"
 	@echo "... ccsm-train"
 	@echo "... ccsm-track"
 	@echo "... Net.o"
@@ -367,6 +417,9 @@ help:
 	@echo "... TrainingData.o"
 	@echo "... TrainingData.i"
 	@echo "... TrainingData.s"
+	@echo "... ccsm-test.o"
+	@echo "... ccsm-test.i"
+	@echo "... ccsm-test.s"
 	@echo "... ccsm-track.o"
 	@echo "... ccsm-track.i"
 	@echo "... ccsm-track.s"

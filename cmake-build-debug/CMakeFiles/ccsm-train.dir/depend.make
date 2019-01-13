@@ -11,6 +11,8 @@ CMakeFiles/ccsm-train.dir/Neuron.cpp.o: ../Neuron.h
 CMakeFiles/ccsm-train.dir/TrainingData.cpp.o: ../TrainingData.cpp
 CMakeFiles/ccsm-train.dir/TrainingData.cpp.o: ../TrainingData.h
 
+CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o: ../Net.h
+CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o: ../Neuron.h
 CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o: ../TrainingData.h
 CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o: ../ccsm-train.cpp
 

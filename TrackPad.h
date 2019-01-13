@@ -43,6 +43,7 @@ public:
     void drawInfoText(string info, Color color = COLOR_TEXT);
     void trackMouseMovement();
     void storeTrack();
+    void clearTrack();
 
     void stopTracking();
     void drawCurrentTrack();
@@ -51,6 +52,7 @@ public:
     bool isTrackingMouse();
 
     vector<Track> getStoredTracks();
+    Track getCurrentTrack();
 };
 
 
