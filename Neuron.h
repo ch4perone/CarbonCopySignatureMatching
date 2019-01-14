@@ -20,7 +20,7 @@ public:
     Neuron(unsigned numOutputs, unsigned index, vector<double> &weight);
 
     void setOutputVal(double val) {m_outputVal = val;}
-    double getOutputVal() const { return m_outputVal;}
+    double getOutputValue() const { return m_outputVal;}
     void feedForward(Layer &prevLayers);
     void calcOutputGradients(double targetVal);
     void calcHiddenGradients(const Layer &nextLayer);
@@ -32,8 +32,8 @@ private:
     static double alpha; //[0.0 .. n] multiplier of the last weight change (monumentum)
 
     static double randomWeight();//TODO return rand() / (double) RAND_MAX;}
-    static double transferFunction(double x);
-    static double transferFunctionDerivative(double x);
+    static double activationFunction(double x);
+    static double activationFunctionDerivative(double x);
     double sumDOW(const Layer &nextLayer) const;
     unsigned m_index;
     double m_outputVal;

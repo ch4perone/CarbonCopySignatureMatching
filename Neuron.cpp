@@ -33,33 +33,33 @@ void Neuron::feedForward(Layer &prevLayers) {
     //including bias node
 
     for (int n = 0; n < prevLayers.size(); ++n) {
-        sum+=prevLayers[n].getOutputVal() * prevLayers[n].m_outputsWeights[m_index].weight;
+        sum+= prevLayers[n].getOutputValue() * prevLayers[n].m_outputsWeights[m_index].weight;
     }
 
 
-    m_outputVal = Neuron::transferFunction(sum);
+    m_outputVal = Neuron::activationFunction(sum);
     //cout << " "<< sum << ">>" << m_outputVal;
 }
 
-double Neuron::transferFunction(double x) {
+double Neuron::activationFunction(double x) {
     //using tanh - output_range [-1, 1] could be any function
     return (double) tanh(x);
 }
 
-double Neuron::transferFunctionDerivative(double x) {
+double Neuron::activationFunctionDerivative(double x) {
     //tanh derivative (approximately)
     return 1- x * x;
 }
 
 void Neuron::calcOutputGradients(double targetVal) {
     double delta = targetVal - m_outputVal;
-    m_gradient = delta * Neuron::transferFunctionDerivative(m_outputVal);
+    m_gradient = delta * Neuron::activationFunctionDerivative(m_outputVal);
 }
 
 void Neuron::calcHiddenGradients(const Layer &nextLayer) {
     double dow = sumDOW(nextLayer);
 
-    m_gradient = dow * Neuron::transferFunctionDerivative(m_outputVal);
+    m_gradient = dow * Neuron::activationFunctionDerivative(m_outputVal);
 
 }
 
@@ -83,7 +83,7 @@ void Neuron::updateInputWeights(Layer &prevLayer) {
         double newDeltaWeight =
                 //Individual input, magnified by the gradient and train rate:
                 eta
-                * neuron.getOutputVal()
+                * neuron.getOutputValue()
                 * m_gradient
                 //+ Monumentum  (fraction of prev delta Weight)
                 + alpha

@@ -116,7 +116,7 @@ int main(int argc, char** argv) {
                 vector<double> prediction;
 
                 ANN.feedForward(input.X);
-                ANN.getResults(prediction);
+                ANN.getOutput(prediction);
                 ANN.backPropagate(input.Y);
 
             }
@@ -124,7 +124,7 @@ int main(int argc, char** argv) {
             /*
             trainingData.restartTesting();
             while(trainingData.getTestProgress() < 1) {
-                //TODO read up on softmax and test/validation error and accuracy
+                //TODO read up on softmaxValue and test/validation error and accuracy
             }*/
 
 

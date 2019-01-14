@@ -57,7 +57,8 @@ int main(int argc, char** argv) {
 
     RenderWindow window(VideoMode(1000, 1000), window_name);
     window.setFramerateLimit(120);
-    TrackPad trackPad(window, "Left Mouse Button    |  Right Mouse Button  |  ESC\n"
+    TrackPad trackPad(window, "Left Mouse Button    "
+                              "|  Right Mouse Button  |  ESC\n"
                               "> Track Mouse        | > Test Signature     | > Discard Signature");
 
     /*
@@ -99,7 +100,7 @@ int main(int argc, char** argv) {
                         DataPiece dp = trainingData.generateDataPiece(trackVector);
                         net.feedForward(dp.X);
                         vector<double> prediction;
-                        net.getResults(prediction);
+                        net.getOutput(prediction);
                         string s = "Prediction: ";
                         for (double p : prediction) {
                             s+=to_string(p) + " ";

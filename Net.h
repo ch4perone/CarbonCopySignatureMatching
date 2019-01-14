@@ -9,7 +9,7 @@ using namespace std;
 
 class Net {
 private:
-    vector<Layer> m_layers; //m_layers[layerNum][neuronNum]
+    vector<Layer> m_layers;
     double m_error;
     double m_recentAverageError;
     double m_recentAverageSmoothingFactor;
@@ -28,15 +28,19 @@ public:
     //load network from file
     explicit Net(string source);
 
-    void feedForward(const vector<double> &inputVals);
+    void feedForward(const vector<double> &inputValues);
 
-    void backPropagate(const vector<double> &targetVals);
-    void getResults(vector<double> &resultVals) const;
+    void backPropagate(const vector<double> &targetValues);
+    void getOutput(vector<double> &outputValues) const;
     stringstream getNetStructure() const;
     void printNetworkStructureVisualization();
     double getRecentAverageError() { return m_recentAverageError;}
     vector<unsigned> getTopology();
 private:
+    static vector<double> softmax(const vector<double> &z);
+    static double softmaxValue(const vector<double> &z, int j);
+    double crossEntropyLoss(const vector<double> &targetValues, const vector<double> &estimatedValues);
+    vector<double> deltaCrossEntropy(vector<double> &targetValues, vector<double> &estimatedValues);
     bool loadWeightsFromSource(string &path, vector<unsigned> &topology, vector<vector<vector<double>>> &weight_cube);
 
 };

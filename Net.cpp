@@ -79,11 +79,11 @@ Net::Net(vector<unsigned> &topology, vector<vector<vector<double> > > &weight_cu
     }
 }
 
-void Net::feedForward(const vector<double> &inputVals) {
-    assert(inputVals.size() == m_layers[0].size() - 1);
+void Net::feedForward(const vector<double> &inputValues) {
+    assert(inputValues.size() == m_layers[0].size() - 1);
 
-    for (int i = 0; i < inputVals.size(); ++i) {
-        m_layers[0][i].setOutputVal(inputVals[i]);
+    for (int i = 0; i < inputValues.size(); ++i) {
+        m_layers[0][i].setOutputVal(inputValues[i]);
     }
 
     //Forward propagate
@@ -95,26 +95,30 @@ void Net::feedForward(const vector<double> &inputVals) {
     }
 }
 
-void Net::backPropagate(const vector<double> &targetVals) {
+void Net::backPropagate(const vector<double> &targetValues) {
     //Calculate overall net error (RMS of output neuron errors)
     Layer &outputLayer = m_layers.back();
     m_error  = 0.0;
 
+    vector<double> estimatedValues;
     for (int n = 0; n < outputLayer.size() - 1; ++n) {
-        double delta = targetVals[n] - outputLayer[n].getOutputVal();
+        estimatedValues.push_back(outputLayer[n].getOutputValue());
+        double delta = targetValues[n] - outputLayer[n].getOutputValue();
         m_error += delta * delta;
     }
 
     m_error /= outputLayer.size() - 1;
     m_error = (double) sqrt(m_error); //RMS
-    cout << m_error << endl;
+
+    double c_error = crossEntropyLoss(targetValues, estimatedValues);
+    cout << m_error << " c: " <<  c_error << endl;
     //Give an insight on average error
     m_recentAverageError = (m_recentAverageError * m_recentAverageSmoothingFactor + m_error)/(m_recentAverageSmoothingFactor + 1);
 
 
     //Calculate the output layer gradients
     for (unsigned n = 0; n < outputLayer.size() - 1; ++n) {
-        outputLayer[n].calcOutputGradients(targetVals[n]);
+        outputLayer[n].calcOutputGradients(targetValues[n]);
     }
 
     //Calculate gradients on hidden layers
@@ -143,15 +147,16 @@ void Net::backPropagate(const vector<double> &targetVals) {
 
 }
 
-void Net::getResults(vector<double> &resultVals) const {
-    resultVals.clear();
+void Net::getOutput(vector<double> &outputValues) const {
+    outputValues.clear();
 
-    //cout << "*********************************" << endl;
     for (int n = 0; n < m_layers.back().size() - 1; ++n) {
-        resultVals.push_back(m_layers.back()[n].getOutputVal());
-        //cout << m_layers.back()[n].getOutputVal() << endl;
-
+        outputValues.push_back(m_layers.back()[n].getOutputValue());
     }
+
+    //TODO implement softmaxValue in network, not just output
+    vector<double> softResults = softmax(outputValues);
+    outputValues = softResults;
 
 }
 
@@ -178,14 +183,17 @@ stringstream Net::getNetStructure() const {
 void Net::printNetworkStructureVisualization() {
     string dots = "\t";
     string nums = "\t";
-    for (int j = 0; j < topology.size(); ++j) {
-        dots += ".    ";
+    for (int i = 0; i < topology.size(); ++i) {
+        string num = to_string(topology[i]);
+        nums += num + "----";
+        dots += ".";
+        for (int i =0; i < num.length() - 1; ++i) {
+            dots+=" ";
+        }
+        dots += "    ";
     }
     dots+="\n";
 
-    for (unsigned i : topology) {
-        nums += to_string(i) + "----";
-    }
     nums = nums.substr(0, nums.length() - 4) + "\n";
 
     cout << "Network structure:" << endl;
@@ -263,4 +271,41 @@ bool Net::loadWeightsFromSource(string &path, vector<unsigned> &topology, vector
 
 vector<unsigned> Net::getTopology() {
     return topology;
+}
+
+double Net::softmaxValue(const vector<double> &z, int j) {
+    double sum = 0;
+    for (double k : z) {
+        sum += exp(k);
+    }
+
+    return exp(z[j]) / sum;
+}
+
+double Net::crossEntropyLoss(const vector<double> &targetValues, const vector<double> &estimatedValues) {
+    double loss = 0;
+    vector<double> softValues = softmax(estimatedValues);
+
+    for (int i = 0; i < softValues.size(); ++i) {
+        loss+=targetValues[i] * log(softValues[i]);
+    }
+    return -loss;
+}
+
+vector<double> Net::deltaCrossEntropy(vector<double> &targetValues, vector<double> &estimatedValues) {
+    vector<double> delta;
+    vector<double> softValues = softmax(estimatedValues);
+
+    for (int i = 0; i < targetValues.size(); ++i) {
+        delta.push_back(estimatedValues[i] - softValues[i]);
+    }
+    return delta;
+}
+
+vector<double> Net::softmax(const vector<double> &z) {
+    vector<double> softResults;
+    for (int i = 0; i < z.size(); ++i) {
+        softResults.push_back(softmaxValue(z, i));
+    }
+    return softResults;
 }
