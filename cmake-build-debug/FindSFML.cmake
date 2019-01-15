@@ -351,10 +351,10 @@ elseif(NOT SFML_FOUND)
 endif()
 if (NOT SFML_FOUND)
     if(SFML_FIND_REQUIRED)
-        # fatal error
+        # fatal rms_error
         message(FATAL_ERROR ${FIND_SFML_ERROR})
     elseif(NOT SFML_FIND_QUIETLY)
-        # error but continue
+        # rms_error but continue
         message("${FIND_SFML_ERROR}")
     endif()
 endif()

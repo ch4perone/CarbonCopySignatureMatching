@@ -47,26 +47,26 @@ cxxopts::ParseResult parseArguments(int argc, char **argv) {
             exit(0);
         }
         if (!result.count("resolution")) {
-            cout << "error parsing options: Argument missing: " << " --resolution" << endl;
+            cout << "rms_error parsing options: Argument missing: " << " --resolution" << endl;
             exit(1);
         }
         if (!result.count("width")) {
-            cout << "error parsing options: Argument missing: " << " --width" << endl;
+            cout << "rms_error parsing options: Argument missing: " << " --width" << endl;
             exit(1);
         }
         if (!result.count("depth")) {
-            cout << "error parsing options: Argument missing: " << " --depth" << endl;
+            cout << "rms_error parsing options: Argument missing: " << " --depth" << endl;
             exit(1);
         }
         if (!result.count("out")) {
-            cout << "error parsing options: Argument missing: " << " --out" << endl;
+            cout << "rms_error parsing options: Argument missing: " << " --out" << endl;
             exit(1);
         }
         return result;
 
     } catch (const cxxopts::OptionException& e)
     {
-        cout << "error parsing options: " << e.what() << endl;
+        cout << "rms_error parsing options: " << e.what() << endl;
         exit(1);
     }
 
@@ -104,6 +104,7 @@ int main(int argc, char** argv) {
 
         //Train network
         int epochs = setDefault_readInputValue<int>(100, "epochs", args);
+        double loss = 1;
         cout << "Begin training" << endl;
         for (int e = 1; e <= epochs; ++e) {
 
@@ -111,30 +112,35 @@ int main(int argc, char** argv) {
             trainingData.restartTraining();
             while(trainingData.getTrainingProgress() < 1) {
 
-                //trainingData.flushTrainingProgressToConsole(e, epochs);
                 DataPiece input = trainingData.getNextTrainingDataPiece();
                 vector<double> prediction;
 
                 ANN.feedForward(input.X);
                 ANN.getOutput(prediction);
                 ANN.backPropagate(input.Y);
+                loss = ANN.getLoss(input.Y);
 
+                trainingData.flushTrainingProgressToConsole(e, epochs, loss);
             }
             //Validate test and training accuracy at epoch end
             /*
             trainingData.restartTesting();
             while(trainingData.getTestProgress() < 1) {
-                //TODO read up on softmaxValue and test/validation error and accuracy
+                //TODO read up on softmaxValue and test/validation rms_error and accuracy
             }*/
 
 
         }
         cout << endl << "Network successfully trained" << endl;
-        //dump final network structure
-        stringstream ss = ANN.getNetStructure();
-        ofstream f(args["out"].as<string>());
-        f << ss.str();
-        f.close();
+
+        string trainingMetaInfo = trainingData.getMetaInfo(epochs); //TODO
+        
+        //save final network structure
+        if(ANN.saveNetworkToFile(args["out"].as<string>(), trainingMetaInfo) ) {
+           cout << "Network successfully saved as " << args["out"].as<string>() << endl;
+        } else {
+            cout << "Error: Saving network failed" << endl;
+        }
 
     }
     else {

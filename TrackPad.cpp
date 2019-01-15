@@ -148,10 +148,12 @@ void TrackPad::stopTracking() {
     isTracking = false;
 }
 
-void TrackPad::drawCurrentTrack() {
-    window.clear(sf::Color::Black);
-    drawDefaultText();
-    drawTrackIndex();
+void TrackPad::drawCurrentTrack(bool clearScreen) {
+    if (clearScreen) {
+        window.clear(sf::Color::Black);
+        drawDefaultText();
+        drawTrackIndex();
+    }
 
 
     for (Vector2f pos : track) {
@@ -223,3 +225,4 @@ Track TrackPad::getCurrentTrack() {
 void TrackPad::clearTrack() {
     track.clear();
 }
+

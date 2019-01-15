@@ -31,14 +31,14 @@ cxxopts::ParseResult parseTestArguments(int argc, char **argv) {
             exit(0);
         }
         if (!result.count("name")) {
-            cout << "error parsing options: Argument missing: " << " --name" << endl;
+            cout << "rms_error parsing options: Argument missing: " << " --name" << endl;
             exit(1);
         }
         return result;
 
     } catch (const cxxopts::OptionException& e)
     {
-        cout << "error parsing options: " << e.what() << endl;
+        cout << "rms_error parsing options: " << e.what() << endl;
         exit(1);
     }
 
@@ -106,8 +106,8 @@ int main(int argc, char** argv) {
                             s+=to_string(p) + " ";
                         }
                         trackPad.drawInfoText(s);
+                        trackPad.drawCurrentTrack(false);
                         trackPad.clearTrack();
-                        window.display();
                     }
                     break;
                 }

@@ -15,33 +15,43 @@ struct Connection {
 
 
 class Neuron {
-public:
-    Neuron(unsigned numOutputs, unsigned index); //random weight
-    Neuron(unsigned numOutputs, unsigned index, vector<double> &weight);
 
-    void setOutputVal(double val) {m_outputVal = val;}
-    double getOutputValue() const { return m_outputVal;}
-    void feedForward(Layer &prevLayers);
-    void calcOutputGradients(double targetVal);
-    void calcHiddenGradients(const Layer &nextLayer);
-    void updateInputWeights(Layer &prevLayer);
-
-    vector<Connection> m_outputsWeights;
 private:
     static double eta; //[0.0 .. 1.0] overall net training rate
     static double alpha; //[0.0 .. n] multiplier of the last weight change (monumentum)
+    unsigned index;
+    double inputSum;
+    double outputValue;
+    double gradient;
 
-    static double randomWeight();//TODO return rand() / (double) RAND_MAX;}
+public:
+    Neuron(unsigned numOutputs, unsigned index); //random weights
+    Neuron(unsigned numOutputs, unsigned index, vector<double> &weight);
+
+    void setOutputValue(double value);
+    double getOutputValue() const;
+    double getInputSum();
+
+    //Feed forward
+    void feedForward(Layer &prevLayers);
+    void computeSoftmaxActivation(const vector<double> &z);
+
+    //Back propagate
+    void calcOutputGradients(double targetValue, const vector<double> &z);
+    void calcHiddenGradients(const Layer &nextLayer);
+    void updateInputWeights(Layer &prevLayer);
+
+    vector<Connection> outputsWeights;
+
+private:
+    double sumDOW(const Layer &nextLayer) const;
+
+    static double randomWeight();
     static double activationFunction(double x);
     static double activationFunctionDerivative(double x);
     static double softmaxFunction(const vector<double> &z, int j);
     static double softmaxFunctionDerivative(const vector<double> &z, int j);
 
-    double sumDOW(const Layer &nextLayer) const;
-    unsigned m_index;
-    double m_inputSum;
-    double m_outputVal;
-    double m_gradient;
 
 };
 

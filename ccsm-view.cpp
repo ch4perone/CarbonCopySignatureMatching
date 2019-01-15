@@ -24,14 +24,14 @@ cxxopts::ParseResult parseViewArguments(int argc, char **argv) {
             exit(0);
         }
         if (!result.count("name")) {
-            cout << "error parsing options: Argument missing: " << " --name" << endl;
+            cout << "rms_error parsing options: Argument missing: " << " --name" << endl;
             exit(1);
         }
         return result;
 
     } catch (const cxxopts::OptionException& e)
     {
-        cout << "error parsing options: " << e.what() << endl;
+        cout << "rms_error parsing options: " << e.what() << endl;
         exit(1);
     }
 

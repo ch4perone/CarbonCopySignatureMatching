@@ -82,10 +82,10 @@ public:
     float getTrainingProgress();
     float getTestProgress();
 
-    void flushTrainingProgressToConsole(int currentEpoch, int maxEpoch);
+    void flushTrainingProgressToConsole(int currentEpoch, int maxEpoch, double recentLoss);
+    string getMetaInfo(int finalEpoch);
+
     void restartTraining();
-
-
     void restartTesting();
     vector<string> getFiles();
 

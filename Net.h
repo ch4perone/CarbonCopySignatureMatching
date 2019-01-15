@@ -9,10 +9,10 @@ using namespace std;
 
 class Net {
 private:
-    vector<Layer> m_layers;
-    double m_error;
-    double m_recentAverageError;
-    double m_recentAverageSmoothingFactor;
+    vector<Layer> layers;
+    double rms_error;
+    double recentAverageError;
+    double recentAverageSmoothingFactor;
     vector<unsigned> topology;
 
 public:
@@ -20,27 +20,26 @@ public:
     Net(int resolution, int numClasses, int width, int depth);
 
     //initialize (new) random weighted network
-    Net(vector<unsigned> &topology);
-
-    //initialize network with preexisting weights
-    Net(vector<unsigned> &topology, vector<vector<vector <double> > > &weight_cube);
+    explicit Net(vector<unsigned> &topology);
 
     //load network from file
     explicit Net(string source);
 
-    void feedForward(const vector<double> &inputValues);
+    //initialize network with topology and weights
+    Net(vector<unsigned> &topology, vector<vector<vector <double> > > &weight_cube);
 
+    void feedForward(const vector<double> &inputValues);
     void backPropagate(const vector<double> &targetValues);
     void getOutput(vector<double> &outputValues) const;
-    stringstream getNetStructure() const;
+    double getLoss(const vector<double> &targetValues);
+
+    bool saveNetworkToFile(string path, string trainingMetaInfo);
+
     void printNetworkStructureVisualization();
-    double getRecentAverageError() { return m_recentAverageError;}
     vector<unsigned> getTopology();
 private:
-    static vector<double> softmax(const vector<double> &z);
-    static double softmaxValue(const vector<double> &z, int j);
+    stringstream getNetStructure() const;
     double crossEntropyLoss(const vector<double> &targetValues, const vector<double> &estimatedValues);
-    vector<double> deltaCrossEntropy(vector<double> &targetValues, vector<double> &estimatedValues);
     bool loadWeightsFromSource(string &path, vector<unsigned> &topology, vector<vector<vector<double>>> &weight_cube);
 
 };

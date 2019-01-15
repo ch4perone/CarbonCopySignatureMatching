@@ -203,8 +203,8 @@ void TrainingData::restartTesting() {
     testIndex = 0;
 }
 
-void TrainingData::flushTrainingProgressToConsole(int currentEpoch, int maxEpoch) {
-    cout << "\r[epoch " << currentEpoch << "/" << maxEpoch << "]" << " progress: " << getTrainingProgress() << flush;
+void TrainingData::flushTrainingProgressToConsole(int currentEpoch, int maxEpoch, double recentLoss) {
+    cout << "\r[epoch " << currentEpoch << "/" << maxEpoch << "]" << " progress: " << int(getTrainingProgress() * 100) << "% " << "loss: " << recentLoss <<  flush;
     //TODO make fancy progress bar
 }
 
@@ -266,4 +266,9 @@ bool TrainingData::hasFileEnding(string &file, string &ending) {
 
 vector<string> TrainingData::getFiles() {
     return files;
+}
+
+string TrainingData::getMetaInfo(int finalEpoch) {
+    //TODO
+    return "";
 }

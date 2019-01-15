@@ -14,13 +14,13 @@ Net::Net(int resolution, int numClasses, int width, int depth) {
     auto numLayers = static_cast<unsigned int>(topology.size());
 
     for (int indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
-        m_layers.emplace_back();
+        layers.emplace_back();
         int numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
 
         for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
-            m_layers.back().push_back(Neuron(numOutputs, indexNeuron));
+            layers.back().push_back(Neuron(numOutputs, indexNeuron));
         }
-        m_layers.back().back().setOutputVal(1.0);
+        layers.back().back().setOutputValue(1.0);
     }
 
 }
@@ -39,13 +39,13 @@ Net::Net(string source) {
     unsigned numLayers = (unsigned int) topology.size();
 
     for (unsigned indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
-        m_layers.push_back(Layer());
+        layers.push_back(Layer());
         unsigned numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
 
         for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
-            m_layers.back().push_back(Neuron(numOutputs, indexNeuron, weight_cube[indexLayer][indexNeuron]));
+            layers.back().push_back(Neuron(numOutputs, static_cast<unsigned int>(indexNeuron), weight_cube[indexLayer][indexNeuron]));
         }
-        m_layers.back().back().setOutputVal(1.0);
+        layers.back().back().setOutputValue(1.0);
     }
 }
 
@@ -54,13 +54,13 @@ Net::Net(vector<unsigned> &topology) {
     auto numLayers = static_cast<unsigned int>(topology.size());
 
     for (unsigned indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
-        m_layers.push_back(Layer());
+        layers.push_back(Layer());
         unsigned numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
 
         for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
-            m_layers.back().push_back(Neuron(numOutputs, indexNeuron));
+            layers.back().push_back(Neuron(numOutputs, indexNeuron));
         }
-        m_layers.back().back().setOutputVal(1.0);
+        layers.back().back().setOutputValue(1.0);
     }
 }
 
@@ -69,62 +69,75 @@ Net::Net(vector<unsigned> &topology, vector<vector<vector<double> > > &weight_cu
     unsigned numLayers = (unsigned int) topology.size();
 
     for (unsigned indexLayer = 0; indexLayer < numLayers; ++indexLayer) {
-        m_layers.push_back(Layer());
+        layers.push_back(Layer());
         unsigned numOutputs = indexLayer == topology.size() -1 ? 0 : topology[indexLayer+1];
 
         for (int indexNeuron = 0; indexNeuron <= topology[indexLayer]; ++indexNeuron) {
-        m_layers.back().push_back(Neuron(numOutputs, indexNeuron, weight_cube[indexLayer][indexNeuron]));
+        layers.back().push_back(Neuron(numOutputs, indexNeuron, weight_cube[indexLayer][indexNeuron]));
         }
-        m_layers.back().back().setOutputVal(1.0);
+        layers.back().back().setOutputValue(1.0);
     }
 }
 
 void Net::feedForward(const vector<double> &inputValues) {
-    assert(inputValues.size() == m_layers[0].size() - 1);
+    assert(inputValues.size() == layers[0].size() - 1);
 
+    //Set input values as output of first layer
     for (int i = 0; i < inputValues.size(); ++i) {
-        m_layers[0][i].setOutputVal(inputValues[i]);
+        layers[0][i].setOutputValue(inputValues[i]);
     }
 
     //Forward propagate
-    for (int indexLayer = 1; indexLayer < m_layers.size(); ++indexLayer) {
-        Layer &prevLayers = m_layers[indexLayer - 1];
-        for (int n = 0; n < m_layers[indexLayer].size() - 1; ++n) {
-            m_layers[indexLayer][n].feedForward(prevLayers);
+    for (int indexLayer = 1; indexLayer < layers.size(); ++indexLayer) {
+        Layer &prevLayers = layers[indexLayer - 1];
+        for (int n = 0; n < layers[indexLayer].size() - 1; ++n) {
+            layers[indexLayer][n].feedForward(prevLayers);
         }
     }
+
+    //Compute softmax activation in last layer
+    vector<double> z; //vector of neuron input (z) before activation (a)
+    Layer &outputLayer= layers.back();
+    for (int i = 0; i < outputLayer.size() - 1; ++i) {
+        z.push_back(outputLayer[i].getInputSum());
+    }
+    for (int j = 0; j < outputLayer.size() - 1; ++j) {
+        outputLayer[j].computeSoftmaxActivation(z);
+    }
+
+
 }
 
 void Net::backPropagate(const vector<double> &targetValues) {
-    //Calculate overall net error (RMS of output neuron errors)
-    Layer &outputLayer = m_layers.back();
-    m_error  = 0.0;
+    //Calculate overall net rms_error (RMS of output neuron errors)
+    Layer &outputLayer = layers.back();
+    rms_error  = 0.0;
 
     vector<double> estimatedValues;
     for (int n = 0; n < outputLayer.size() - 1; ++n) {
         estimatedValues.push_back(outputLayer[n].getOutputValue());
-        double delta = targetValues[n] - outputLayer[n].getOutputValue();
-        m_error += delta * delta;
+        //double delta = targetValues[n] - outputLayer[n].getOutputValue();
+        //rms_error += delta * delta;
     }
 
-    m_error /= outputLayer.size() - 1;
-    m_error = (double) sqrt(m_error); //RMS
-
-    double c_error = crossEntropyLoss(targetValues, estimatedValues);
-    cout << m_error << " c: " <<  c_error << endl;
-    //Give an insight on average error
-    m_recentAverageError = (m_recentAverageError * m_recentAverageSmoothingFactor + m_error)/(m_recentAverageSmoothingFactor + 1);
+    //rms_error /= outputLayer.size() - 1;
+    //rms_error = sqrt(rms_error); //RMS
+    //recentAverageError = (recentAverageError * recentAverageSmoothingFactor + rms_error)/(recentAverageSmoothingFactor + 1);
 
 
-    //Calculate the output layer gradients
+    //Calculate the output layer gradients from softmax
+    vector<double> z; //vector of neuron input (z) before activation (a)
+    for (int i = 0; i < outputLayer.size() - 1; ++i) {
+        z.push_back(outputLayer[i].getInputSum());
+    }
     for (unsigned n = 0; n < outputLayer.size() - 1; ++n) {
-        outputLayer[n].calcOutputGradients(targetValues[n]);
+        outputLayer[n].calcOutputGradients(targetValues[n], z);
     }
 
     //Calculate gradients on hidden layers
-    for (unsigned indexLayer = m_layers.size() - 2; indexLayer > 0; --indexLayer) {
-        Layer &hiddenLayer = m_layers[indexLayer];
-        Layer &nextLayer = m_layers[indexLayer + 1];
+    for (unsigned indexLayer = layers.size() - 2; indexLayer > 0; --indexLayer) {
+        Layer &hiddenLayer = layers[indexLayer];
+        Layer &nextLayer = layers[indexLayer + 1];
 
 
         for (unsigned n = 0; n < hiddenLayer.size(); ++n) {
@@ -133,15 +146,14 @@ void Net::backPropagate(const vector<double> &targetValues) {
     }
 
     //For all layers from output to first hidden Layer
-    //Update conection weight
+    //Update connection weights
+    for (int indexLayer = layers.size() - 1; indexLayer > 0; --indexLayer) {
 
-    for (int indexLayer = m_layers.size() - 1; indexLayer > 0; --indexLayer) {
+        Layer &layer = layers[indexLayer];
+        Layer &prevLayer = layers[indexLayer - 1];
 
-        Layer &layer = m_layers[indexLayer];
-        Layer &prevLayer = m_layers[indexLayer - 1];
-
-        for (int n = 0; n < layer.size(); ++n) {
-            layer[n].updateInputWeights(prevLayer);
+        for (auto &neuron : layer) {
+            neuron.updateInputWeights(prevLayer);
         }
     }
 
@@ -150,27 +162,22 @@ void Net::backPropagate(const vector<double> &targetValues) {
 void Net::getOutput(vector<double> &outputValues) const {
     outputValues.clear();
 
-    for (int n = 0; n < m_layers.back().size() - 1; ++n) {
-        outputValues.push_back(m_layers.back()[n].getOutputValue());
+    for (int n = 0; n < layers.back().size() - 1; ++n) {
+        outputValues.push_back(layers.back()[n].getOutputValue());
     }
-
-    //TODO implement softmaxValue in network, not just output
-    vector<double> softResults = softmax(outputValues);
-    outputValues = softResults;
-
 }
 
 stringstream Net::getNetStructure() const {
     stringstream ss_topology, ss_neurons;
     ss_topology << "topology:";
-    for(int i = 0; i < m_layers.size(); ++i) {
-        ss_topology << " " << m_layers[i].size() - 1;
-        if (i == m_layers.size() - 1)
+    for(int i = 0; i < layers.size(); ++i) {
+        ss_topology << " " << layers[i].size() - 1;
+        if (i == layers.size() - 1)
             break;
-        for (int j = 0; j < m_layers[i].size(); ++j) {
+        for (int j = 0; j < layers[i].size(); ++j) {
             ss_neurons << "[" << i << "," << j << "]";
-            const Neuron *c_neuron = &m_layers[i][j];
-            for(Connection c : c_neuron->m_outputsWeights) {
+            const Neuron *c_neuron = &layers[i][j];
+            for(Connection c : c_neuron->outputsWeights) {
                 ss_neurons << " " << c.weight;
             }
             ss_neurons << endl;
@@ -273,39 +280,31 @@ vector<unsigned> Net::getTopology() {
     return topology;
 }
 
-double Net::softmaxValue(const vector<double> &z, int j) {
-    double sum = 0;
-    for (double k : z) {
-        sum += exp(k);
-    }
-
-    return exp(z[j]) / sum;
-}
-
 double Net::crossEntropyLoss(const vector<double> &targetValues, const vector<double> &estimatedValues) {
     double loss = 0;
-    vector<double> softValues = softmax(estimatedValues);
 
-    for (int i = 0; i < softValues.size(); ++i) {
-        loss+=targetValues[i] * log(softValues[i]);
+    for (int i = 0; i < estimatedValues.size(); ++i) {
+        loss+=targetValues[i] * log(estimatedValues[i]);
     }
     return -loss;
 }
 
-vector<double> Net::deltaCrossEntropy(vector<double> &targetValues, vector<double> &estimatedValues) {
-    vector<double> delta;
-    vector<double> softValues = softmax(estimatedValues);
+double Net::getLoss(const vector<double> &targetValues) {
+    vector<double> estimatedValues;
+    getOutput(estimatedValues);
+    return crossEntropyLoss(targetValues, estimatedValues);
 
-    for (int i = 0; i < targetValues.size(); ++i) {
-        delta.push_back(estimatedValues[i] - softValues[i]);
-    }
-    return delta;
 }
 
-vector<double> Net::softmax(const vector<double> &z) {
-    vector<double> softResults;
-    for (int i = 0; i < z.size(); ++i) {
-        softResults.push_back(softmaxValue(z, i));
+bool Net::saveNetworkToFile(string path, string trainingMetaInfo) {
+    stringstream ss = getNetStructure();
+    ofstream f(path);
+    if (!f.good()) {
+        cout << "Error: output file " << path << "not good" << endl;
+        return false;
     }
-    return softResults;
+    f << ss.str();
+    f.close();
+    return true;
 }
+

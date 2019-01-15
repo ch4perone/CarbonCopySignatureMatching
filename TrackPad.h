@@ -46,7 +46,8 @@ public:
     void clearTrack();
 
     void stopTracking();
-    void drawCurrentTrack();
+    void drawCurrentTrack(bool clearScreen = true);
+
 
     void discardTrack();
     bool isTrackingMouse();
