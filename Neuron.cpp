@@ -1,5 +1,6 @@
 #include <cstdlib>
 #include <cmath>
+#include <iostream>
 #include "Neuron.h"
 
 
@@ -41,20 +42,11 @@ void Neuron::feedForward(Layer &prevLayers) {
     //cout << " "<< sum << ">>" << m_outputVal;
 }
 
-double Neuron::activationFunction(double x) {
-    //using tanh - output_range [-1, 1] could be any function
-    return (double) tanh(x);
-}
-
-double Neuron::activationFunctionDerivative(double x) {
-    //tanh derivative (approximately)
-    return 1- x * x;
-}
-
 void Neuron::calcOutputGradients(double targetVal) {
     double delta = targetVal - m_outputVal;
     m_gradient = delta * Neuron::activationFunctionDerivative(m_outputVal);
 }
+
 
 void Neuron::calcHiddenGradients(const Layer &nextLayer) {
     double dow = sumDOW(nextLayer);
@@ -72,6 +64,11 @@ double Neuron::sumDOW(const Layer &nextLayer) const {
     return sum;
 }
 
+/*
+ * For the this neuron, update all previous neurons weights that are connected to this
+ * according to the gradient in this neuron
+ * times the actual activation in the prev. neurons (times rates) ^= sensitivity of the weight to changes
+ */
 void Neuron::updateInputWeights(Layer &prevLayer) {
 
     //The weights to be updated are in the Connection container
@@ -110,4 +107,29 @@ double Neuron::randomWeight() {
 
     return x;
 
+}
+/*
+ * activation functions and derivatives
+ */
+double Neuron::activationFunction(double x) {
+    //using tanh - output_range [-1, 1] could be any function
+    return (double) tanh(x);
+}
+
+double Neuron::activationFunctionDerivative(double x) {
+    //tanh derivative (approximately)
+    return 1- x * x;
+}
+
+double Neuron::softmaxFunction(const vector<double> &z, int j) {
+    double sum = 0;
+    for (double k : z) {
+        sum += exp(k);
+    }
+
+    return exp(z[j]) / sum;
+}
+
+double Neuron::softmaxFunctionDerivative(const vector<double> &z, int j) {
+    return 0;
 }

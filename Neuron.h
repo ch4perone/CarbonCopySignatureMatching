@@ -34,8 +34,12 @@ private:
     static double randomWeight();//TODO return rand() / (double) RAND_MAX;}
     static double activationFunction(double x);
     static double activationFunctionDerivative(double x);
+    static double softmaxFunction(const vector<double> &z, int j);
+    static double softmaxFunctionDerivative(const vector<double> &z, int j);
+
     double sumDOW(const Layer &nextLayer) const;
     unsigned m_index;
+    double m_inputSum;
     double m_outputVal;
     double m_gradient;
 
