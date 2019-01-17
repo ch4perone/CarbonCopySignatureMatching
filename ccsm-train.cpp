@@ -2,6 +2,8 @@
 #include <cxxopts.hpp>
 #include <cassert>
 #include <fstream>
+#include <chrono>
+#include <thread>
 #include "TrainingData.h"
 #include "Net.h"
 
@@ -94,7 +96,8 @@ int main(int argc, char** argv) {
         TrainingData trainingData("./signatures", args["resolution"].as<int>());
         trainingData.shuffleTrainingData();
         auto trainTestSplit = setDefault_readInputValue<float>(0.8f, "trainTestSplit", args);
-        trainingData.splitTestTrainingData(trainTestSplit); //TODO
+        trainingData.splitTestTrainingData(trainTestSplit, true);
+
 
         //Setup neural network
         cout << "Construct randomized neural network" << endl;
@@ -104,7 +107,8 @@ int main(int argc, char** argv) {
 
         //Train network
         int epochs = setDefault_readInputValue<int>(100, "epochs", args);
-        double loss = 1;
+        double loss = 9999;
+        double previousLoss = 99999;
         cout << "Begin training" << endl;
         for (int e = 1; e <= epochs; ++e) {
 
@@ -118,17 +122,31 @@ int main(int argc, char** argv) {
                 ANN.feedForward(input.X);
                 ANN.getOutput(prediction);
                 ANN.backPropagate(input.Y);
-                loss = ANN.getLoss(input.Y);
 
                 trainingData.flushTrainingProgressToConsole(e, epochs, loss);
+                std::this_thread::sleep_for(std::chrono::milliseconds(100));
             }
-            //Validate test and training accuracy at epoch end
-            /*
-            trainingData.restartTesting();
-            while(trainingData.getTestProgress() < 1) {
-                //TODO read up on softmaxValue and test/validation rms_error and accuracy
-            }*/
 
+            //Validate test accuracy/loss at epoch end
+            trainingData.restartTesting();
+            loss = 0;
+            while(trainingData.getTestProgress() < 1) {
+                DataPiece testInput = trainingData.getNextTestDataPiece();
+                vector<double> prediction;
+
+                ANN.feedForward(testInput.X);
+                ANN.getOutput(prediction);
+                ANN.backPropagate(testInput.Y);
+                loss += ANN.getLoss(testInput.Y);
+            }
+            loss /= trainingData.getTestSampleSize();
+
+            if(previousLoss < loss) {
+                cout << "Early Stop Triggered: Caused by increasing test loss after " << e << " epochs.";
+                epochs = e;
+                break;
+            }
+            previousLoss = loss;
 
         }
         cout << endl << "Network successfully trained" << endl;

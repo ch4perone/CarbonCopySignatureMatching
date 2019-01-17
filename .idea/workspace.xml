@@ -16,34 +16,21 @@
   <component name="ChangeListManager">
     <list default="true" id="127a733b-2360-4371-b420-68475f55928a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Net.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Net.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Net.h" beforeDir="false" afterPath="$PROJECT_DIR$/Net.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Neuron.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Neuron.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Neuron.h" beforeDir="false" afterPath="$PROJECT_DIR$/Neuron.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrackPad.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TrackPad.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TrackPad.h" beforeDir="false" afterPath="$PROJECT_DIR$/TrackPad.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TrainingData.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TrainingData.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/TrainingData.h" beforeDir="false" afterPath="$PROJECT_DIR$/TrainingData.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ccsm-test.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ccsm-test.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ccsm-track.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ccsm-track.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ccsm-train.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ccsm-train.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ccsm-view.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ccsm-view.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/Net.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/Net.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/Neuron.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/Neuron.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/TrackPad.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/TrackPad.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/TrainingData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/TrainingData.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/ccsm-test.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-test.dir/ccsm-test.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-track.dir/TrackPad.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-track.dir/TrackPad.cpp.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-track.dir/ccsm-track.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-track.dir/ccsm-track.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/CXX.includecache" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/CXX.includecache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/Net.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/Net.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/Neuron.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/Neuron.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/TrainingData.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/TrainingData.cpp.o" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/ccsm-train.dir/ccsm-train.cpp.o" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/FindSFML.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/FindSFML.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/ccsm-test" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ccsm-test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ccsm-train" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ccsm-train" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/testNet.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/testNet_OK.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ccsm-track" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/ccsm-track" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/ccsm-train" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/testNet.txt" beforeDir="false" afterPath="$PROJECT_DIR$/testNet.txt" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -72,7 +59,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Net.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-331">
+            <state relative-caret-position="135">
               <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
               <folding>
                 <element signature="e#85#103#0" expanded="true" />
@@ -84,7 +71,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Net.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
+            <state relative-caret-position="4470">
               <caret line="298" column="6" selection-start-line="298" selection-start-column="6" selection-end-line="298" selection-end-column="6" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -93,11 +80,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ccsm-train.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
+            <state relative-caret-position="151">
+              <caret line="95" column="12" selection-start-line="95" selection-start-column="12" selection-end-line="95" selection-end-column="12" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -105,11 +92,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TrainingData.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="436">
-              <caret line="272" column="12" selection-start-line="272" selection-start-column="12" selection-end-line="272" selection-end-column="12" />
+            <state relative-caret-position="530">
+              <caret line="221" column="14" selection-start-line="221" selection-start-column="14" selection-end-line="221" selection-end-column="14" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -120,8 +107,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TrainingData.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+            <state relative-caret-position="239">
+              <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
               <folding>
                 <element signature="e#103#120#0" expanded="true" />
               </folding>
@@ -132,7 +119,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TrackPad.cpp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="189">
+            <state relative-caret-position="1860">
               <caret line="124" column="15" selection-start-line="124" selection-start-column="15" selection-end-line="124" selection-end-column="15" />
             </state>
           </provider>
@@ -141,7 +128,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TrackPad.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
+            <state relative-caret-position="720">
               <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
               <folding>
                 <element signature="e#162#181#0" expanded="true" />
@@ -185,10 +172,10 @@
         <option value="$PROJECT_DIR$/Neuron.h" />
         <option value="$PROJECT_DIR$/Net.h" />
         <option value="$PROJECT_DIR$/Net.cpp" />
+        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
+        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
         <option value="$PROJECT_DIR$/TrainingData.h" />
         <option value="$PROJECT_DIR$/TrainingData.cpp" />
-        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
-        <option value="$PROJECT_DIR$/ccsm-train.cpp" />
       </list>
     </option>
   </component>
@@ -204,7 +191,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -221,6 +207,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -248,7 +235,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ccsm-test">
+  <component name="RunManager" selected="Application.ccsm-train">
     <configuration name="CarbonCopySignatureMatching" type="CMakeRunConfiguration" factoryName="Application" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="CarbonCopySignatureMatching" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="CarbonCopySignatureMatching">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -259,12 +246,12 @@
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ccsm-track" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="vertical_line_down" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="ccsm-track" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="ccsm-track">
+    <configuration name="ccsm-track" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="josh" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="ccsm-track" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="ccsm-track">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ccsm-train" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-o ./testNet.txt --resolution 5 --epochs 1000 --width 10 --depth 3" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="ccsm-train" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="ccsm-train">
+    <configuration name="ccsm-train" type="CMakeRunConfiguration" factoryName="Application" PROGRAM_PARAMS="-o ./testNet.txt --resolution 20 --epochs 100000 --width 10 --depth 3" WORKING_DIR="file://$PROJECT_DIR$" PASS_PARENT_ENVS_2="true" PROJECT_NAME="CarbonCopySignatureMatching" TARGET_NAME="ccsm-train" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="CarbonCopySignatureMatching" RUN_TARGET_NAME="ccsm-train">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -308,18 +295,20 @@
       <workItem from="1547372754389" duration="24763000" />
       <workItem from="1547466502637" duration="9329000" />
       <workItem from="1547487366290" duration="548000" />
-      <workItem from="1547550970378" duration="11726000" />
+      <workItem from="1547550970378" duration="11910000" />
+      <workItem from="1547635010208" duration="898000" />
+      <workItem from="1547724886147" duration="4242000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="136406000" />
+    <option name="totallyTimeSpent" value="141730000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="25" width="1877" height="1055" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25723648" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.26269796" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -331,7 +320,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Database Changes" order="7" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32937366" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32829374" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.3275862" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="bottom" id="CMake" order="12" weight="0.32937366" />
@@ -418,13 +407,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/testNet_OK.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="5" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/testNet_OK.txt" />
     <entry file="file://$PROJECT_DIR$/signatures/alpha.sgn.tsv">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -437,23 +420,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/testNet_Ok.txt">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TrackPad.h">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
-          <folding>
-            <element signature="e#162#181#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TrackPad.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="124" column="15" selection-start-line="124" selection-start-column="15" selection-end-line="124" selection-end-column="15" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ccsm-test.cpp">
       <provider selected="true" editor-type-id="text-editor">
@@ -482,19 +448,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Net.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="298" column="6" selection-start-line="298" selection-start-column="6" selection-end-line="298" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Net.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-331">
+        <state relative-caret-position="135">
           <caret line="9" column="6" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
           <folding>
             <element signature="e#85#103#0" expanded="true" />
@@ -502,32 +458,59 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TrainingData.cpp">
+    <entry file="file://$PROJECT_DIR$/Net.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="436">
-          <caret line="272" column="12" selection-start-line="272" selection-start-column="12" selection-end-line="272" selection-end-column="12" />
+        <state relative-caret-position="4470">
+          <caret line="298" column="6" selection-start-line="298" selection-start-column="6" selection-end-line="298" selection-end-column="6" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TrainingData.h">
+    <entry file="file://$PROJECT_DIR$/TrackPad.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="85" column="18" selection-start-line="85" selection-start-column="18" selection-end-line="85" selection-end-column="18" />
+        <state relative-caret-position="1860">
+          <caret line="124" column="15" selection-start-line="124" selection-start-column="15" selection-end-line="124" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TrackPad.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="48" column="51" selection-start-line="48" selection-start-column="51" selection-end-line="48" selection-end-column="51" />
           <folding>
-            <element signature="e#103#120#0" expanded="true" />
+            <element signature="e#162#181#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ccsm-train.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="144" column="5" lean-forward="true" selection-start-line="144" selection-start-column="5" selection-end-line="144" selection-end-column="5" />
+        <state relative-caret-position="151">
+          <caret line="95" column="12" selection-start-line="95" selection-start-column="12" selection-end-line="95" selection-end-column="12" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TrainingData.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="239">
+          <caret line="97" column="9" selection-start-line="97" selection-start-column="9" selection-end-line="97" selection-end-column="9" />
+          <folding>
+            <element signature="e#103#120#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TrainingData.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="530">
+          <caret line="221" column="14" selection-start-line="221" selection-start-column="14" selection-end-line="221" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
