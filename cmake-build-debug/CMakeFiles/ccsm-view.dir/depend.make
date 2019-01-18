@@ -4,6 +4,10 @@
 CMakeFiles/ccsm-view.dir/TrackPad.cpp.o: ../TrackPad.cpp
 CMakeFiles/ccsm-view.dir/TrackPad.cpp.o: ../TrackPad.h
 
+CMakeFiles/ccsm-view.dir/TrainingData.cpp.o: ../TrainingData.cpp
+CMakeFiles/ccsm-view.dir/TrainingData.cpp.o: ../TrainingData.h
+
 CMakeFiles/ccsm-view.dir/ccsm-view.cpp.o: ../TrackPad.h
+CMakeFiles/ccsm-view.dir/ccsm-view.cpp.o: ../TrainingData.h
 CMakeFiles/ccsm-view.dir/ccsm-view.cpp.o: ../ccsm-view.cpp
 

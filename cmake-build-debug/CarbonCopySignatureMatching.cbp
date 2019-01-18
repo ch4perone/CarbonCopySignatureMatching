@@ -249,10 +249,12 @@
 			<Option target="ccsm-track"/>
 		</Unit>
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.cpp">
+			<Option target="ccsm-view"/>
 			<Option target="ccsm-test"/>
 			<Option target="ccsm-train"/>
 		</Unit>
 		<Unit filename="/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h">
+			<Option target="ccsm-view"/>
 			<Option target="ccsm-test"/>
 			<Option target="ccsm-train"/>
 		</Unit>

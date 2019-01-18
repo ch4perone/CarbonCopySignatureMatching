@@ -226,3 +226,11 @@ void TrackPad::clearTrack() {
     track.clear();
 }
 
+void TrackPad::setCurrentTrack(vector<pair<int, int>> &trackVector) {
+    track.clear();
+    for (pair<int, int> &v : trackVector) {
+        Vector2f V(v.first, v.second);
+        track.push_back(V);
+    }
+}
+

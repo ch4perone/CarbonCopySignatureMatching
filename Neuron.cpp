@@ -103,7 +103,7 @@ void Neuron::updateInputWeights(Layer &prevLayer) {
 }
 
 double Neuron::randomWeight() {
-    return (double) rand() / (double) RAND_MAX - 0.5f;
+    return  2.f * (double) rand() / (double) RAND_MAX - 1.f;
 }
 
 /*

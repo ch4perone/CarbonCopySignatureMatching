@@ -37,6 +37,7 @@ public:
     bool previous();
 
     void setDefaultText(string text);
+    void setCurrentTrack(vector<pair<int, int>> &trackVector);
     void drawDefaultText(Color color = COLOR_TEXT);
     void drawTrackCount(Color color = COLOR_TEXT);
     void drawTrackIndex(Color color = COLOR_TEXT);

@@ -261,6 +261,7 @@ TrainingData.o: TrainingData.cpp.o
 
 # target to build an object file
 TrainingData.cpp.o:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrainingData.cpp.o
 	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrainingData.cpp.o
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.o
 .PHONY : TrainingData.cpp.o
@@ -271,6 +272,7 @@ TrainingData.i: TrainingData.cpp.i
 
 # target to preprocess a source file
 TrainingData.cpp.i:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrainingData.cpp.i
 	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrainingData.cpp.i
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.i
 .PHONY : TrainingData.cpp.i
@@ -281,6 +283,7 @@ TrainingData.s: TrainingData.cpp.s
 
 # target to generate assembly for a file
 TrainingData.cpp.s:
+	$(MAKE) -f CMakeFiles/ccsm-view.dir/build.make CMakeFiles/ccsm-view.dir/TrainingData.cpp.s
 	$(MAKE) -f CMakeFiles/ccsm-test.dir/build.make CMakeFiles/ccsm-test.dir/TrainingData.cpp.s
 	$(MAKE) -f CMakeFiles/ccsm-train.dir/build.make CMakeFiles/ccsm-train.dir/TrainingData.cpp.s
 .PHONY : TrainingData.cpp.s

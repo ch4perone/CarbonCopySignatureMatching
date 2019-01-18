@@ -3,6 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <fstream>
 #include "TrackPad.h"
+#include "TrainingData.h"
 
 using namespace std;
 using namespace sf;
@@ -105,6 +106,27 @@ int main(int argc, char** argv) {
                 case Event::KeyPressed: {
                     if (event.key.code == Keyboard::Escape) {
                         //TODO trackPad.discardTrack();
+                    }
+                    else if (event.key.code == Keyboard::A) {
+                        Track track = trackPad.getCurrentTrack();
+                        vector<pair<int, int>> trackVector;
+                        for (Vector2f v : track) {
+                            trackVector.push_back(make_pair(v.x, v.y));
+                        }
+                        DataPiece ori = TrainingData::generateDataPiece(trackVector, 12); //TODO resolution
+                        DataPiece aug = TrainingData::augmentDataPiece(ori, 12);
+
+                        ori.printContent();
+                        aug.printContent();
+
+                        vector<pair<int, int>> augVector = aug.originalTrack;
+
+                        trackPad.drawInfoText("Augmentation");
+                        trackPad.setCurrentTrack(augVector);
+                        trackPad.drawCurrentTrack(false);
+
+
+
                     }
                     break;
                 }

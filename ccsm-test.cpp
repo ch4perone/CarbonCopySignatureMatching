@@ -65,7 +65,7 @@ int main(int argc, char** argv) {
      * Load neural network
      */
     Net net(args["name"].as<string>());
-    TrainingData trainingData(net.getTopology()[0] / 2);
+    int resolution = net.getTopology()[0] / 2;
     /*
      * With open window
      */
@@ -97,7 +97,7 @@ int main(int argc, char** argv) {
                         /*for (int i = 0; i < train.size(); i+=2) {
                             trackVector.push_back({train[i], train[i+1]});
                         }*/
-                        DataPiece dp = trainingData.generateDataPiece(trackVector);
+                        DataPiece dp = TrainingData::generateDataPiece(trackVector, resolution);
                         net.feedForward(dp.X);
                         vector<double> prediction;
                         net.getOutput(prediction);

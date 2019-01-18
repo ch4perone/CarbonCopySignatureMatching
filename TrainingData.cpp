@@ -9,10 +9,7 @@
 #include <cassert>
 #include "TrainingData.h"
 
-
-TrainingData::TrainingData(int resolution) {
-    this->resolution = resolution;
-}
+double TrainingData::maxAugmentingRotation = 10;
 
 TrainingData::TrainingData(string path, int resolution) {
     files = getFilesInDirectory(path, ".sgn.tsv");
@@ -39,7 +36,7 @@ TrainingData::TrainingData(string path, int resolution) {
                 track.emplace_back(x,y);
             }
             if(!track.empty()) { //Drop empty lines
-                DataPiece dp = generateDataPiece(track);
+                DataPiece dp = generateDataPiece(track, resolution);
                 dp.setY(Y);
                 assert(dp.X.size() == resolution * 2);
                 trainingPieces.push_back(dp);
@@ -51,7 +48,7 @@ TrainingData::TrainingData(string path, int resolution) {
 
 
 
-DataPiece TrainingData::generateDataPiece(vector<pair<int, int>> &track) {
+DataPiece TrainingData::generateDataPiece(vector<pair<int, int>> &track, int resolution) {
     /*
      * Crucial algorithm to extract direction vectors from pixel tracks
      *      Select pixel coordinates according to network resolution
@@ -201,7 +198,7 @@ int TrainingData::getTrainingSampleSize() {
 }
 
 int TrainingData::getTestSampleSize() {
-    return testPieces.size();
+    return (int) testPieces.size();
 }
 
 void TrainingData::augmentTrainingData(int times) {
@@ -218,13 +215,65 @@ void TrainingData::augmentTrainingData(int times) {
             //TODO get random degree in range
             double degree;
 
-            //rotateTrack(track, degree);
+            rotateTrack(track, degree);
             //sheerTrack(track);
 
-            DataPiece aug = generateDataPiece(track);
+            DataPiece aug = generateDataPiece(track, resolution);
             aug.setY(ori.Y);
             assert(aug.X.size() == resolution * 2);
             trainingPieces.push_back(aug);
         }
     }
+}
+
+DataPiece TrainingData::augmentDataPiece(DataPiece ori, int resolution) {
+    double angle = 2 * maxAugmentingRotation * (double) rand() / (double) RAND_MAX - maxAugmentingRotation;
+
+    vector<pair<int, int>> track = ori.originalTrack;
+
+    rotateTrack(track, angle);
+    //sheerTrack(track);
+
+    DataPiece aug = generateDataPiece(track, resolution);
+    aug.setY(ori.Y);
+    assert(aug.X.size() == resolution * 2);
+
+    return aug;
+}
+
+void TrainingData::rotateTrack(vector<pair<int, int>> &track, double angle) {
+
+    int center_x = 0;
+    int center_y = 0;
+
+    for (pair<int,int> v : track) {
+        center_x+=v.first;
+        center_y+=v.second;
+    }
+
+    center_x /= track.size();
+    center_y /= track.size();
+
+    for (pair<int,int> &v : track) {
+        pair<int, int> dif;
+        dif.first = v.first - center_x;
+        dif.second = v.second - center_y;
+
+        rotateVector(dif, angle);
+
+        v.first = dif.first + center_x;
+        v.second = dif.second + center_y;
+    }
+}
+
+void TrainingData::rotateVector(pair<int, int> &v, double angle) {
+    angle*= M_PI/ 180;
+
+    double x,y;
+    x = double(v.first) * cos(angle) - double(v.second) * sin(angle);
+    y = double(v.first) * sin(angle) + double(v.second) * cos(angle);
+
+    v.first = (int) x;
+    v.second = (int) y;
+
 }

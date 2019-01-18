@@ -54,6 +54,9 @@ private:
     vector<string> files;
     vector<DataPiece> trainingPieces;
     vector<DataPiece> testPieces;
+
+    static double maxAugmentingRotation;
+
 public:
 
     /*
@@ -63,7 +66,6 @@ public:
      */
 
     TrainingData(string path, int resolution);
-    explicit TrainingData(int resolution); //Empty training data object //TODO refactor
 
     //shuffle training data vector
     void shuffleTrainingData();
@@ -89,14 +91,20 @@ public:
     void restartTesting();
     vector<string> getFiles();
 
-    //Preprocess input line according to network resolution and generate DataPiece object
-    DataPiece generateDataPiece(vector<pair<int, int>> &track);
+    /*
+     * Static: Pre-processing of pixel track according to network resolution and generation DataPiece object
+     */
+
+    static DataPiece generateDataPiece(vector<pair<int, int>> &track, int resolution);
+    static DataPiece augmentDataPiece(DataPiece ori, int resolution);
 
 private:
-    pair<double, double> normalizedDirectionVector(pair<int, int> coordinate1, pair<int, int> coordinate2);
-    void interpolateTrack(vector<pair<int, int>> &track);
-    void rotateTrack(vector<pair<int, int>> &track, double degree);
-    void sheerTrack(vector<pair<int, int>> &track);
+    static pair<double, double> normalizedDirectionVector(pair<int, int> coordinate1, pair<int, int> coordinate2);
+    static void interpolateTrack(vector<pair<int, int>> &track);
+    static void rotateTrack(vector<pair<int, int>> &track, double angle);
+    static void sheerTrack(vector<pair<int, int>> &track);
+
+    static void rotateVector(pair<int, int> &v, double angle);
 
     vector<string> getFilesInDirectory(string path, string extension);
     bool hasFileEnding(string &file, string &ending);
