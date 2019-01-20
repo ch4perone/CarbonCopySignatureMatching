@@ -6,16 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.h
-iostream
--
-cxxopts.hpp
--
-SFML/Graphics.hpp
--
-fstream
--
-
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.cpp
 sstream
 -
@@ -43,18 +33,4 @@ string
 -
 vector
 -
-
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-view.cpp
-iostream
--
-cxxopts.hpp
--
-SFML/Graphics.hpp
--
-fstream
--
-TrackPad.h
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.h
-TrainingData.h
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h
 

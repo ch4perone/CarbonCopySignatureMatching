@@ -97,6 +97,8 @@ int main(int argc, char** argv) {
         trainingData.shuffleTrainingData();
         auto trainTestSplit = setDefault_readInputValue<float>(0.8f, "trainTestSplit", args);
         trainingData.splitTestTrainingData(trainTestSplit, true);
+        trainingData.augmentTrainingData(4);
+        trainingData.shuffleTrainingData();
 
 
         //Setup neural network
@@ -124,7 +126,7 @@ int main(int argc, char** argv) {
                 ANN.backPropagate(input.Y);
 
                 trainingData.flushTrainingProgressToConsole(e, epochs, loss);
-                std::this_thread::sleep_for(std::chrono::milliseconds(100));
+                //std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
 
             //Validate test accuracy/loss at epoch end

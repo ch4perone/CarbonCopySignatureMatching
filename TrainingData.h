@@ -56,6 +56,7 @@ private:
     vector<DataPiece> testPieces;
 
     static double maxAugmentingRotation;
+    static double maxAugmentingShearFactor;
 
 public:
 
@@ -102,9 +103,10 @@ private:
     static pair<double, double> normalizedDirectionVector(pair<int, int> coordinate1, pair<int, int> coordinate2);
     static void interpolateTrack(vector<pair<int, int>> &track);
     static void rotateTrack(vector<pair<int, int>> &track, double angle);
-    static void sheerTrack(vector<pair<int, int>> &track);
+    static void shearTrack(vector<pair<int, int>> &track, pair<double, double> &dir);
 
     static void rotateVector(pair<int, int> &v, double angle);
+    static void rotateVector(pair<double, double> &v, double angle);
 
     vector<string> getFilesInDirectory(string path, string extension);
     bool hasFileEnding(string &file, string &ending);

@@ -10,6 +10,7 @@
 #include "TrainingData.h"
 
 double TrainingData::maxAugmentingRotation = 10;
+double TrainingData::maxAugmentingShearFactor = 0.2f;
 
 TrainingData::TrainingData(string path, int resolution) {
     files = getFilesInDirectory(path, ".sgn.tsv");
@@ -172,7 +173,7 @@ vector<string> TrainingData::getFilesInDirectory(string path, string extension) 
     while ((entry = readdir(dir)) != NULL) {
         string name(entry->d_name);
         if (hasFileEnding(name, extension))
-            filenames.push_back(path+ "/" +name);
+            filenames.push_back(path + "/" + name);
     }
     closedir(dir);
 
@@ -194,7 +195,7 @@ string TrainingData::getMetaInfo(int finalEpoch) {
 }
 
 int TrainingData::getTrainingSampleSize() {
-    return trainingPieces.size();
+    return (int) trainingPieces.size();
 }
 
 int TrainingData::getTestSampleSize() {
@@ -202,37 +203,40 @@ int TrainingData::getTestSampleSize() {
 }
 
 void TrainingData::augmentTrainingData(int times) {
-    //fields
-    double maxDegree = 5;
-
 
     int trainingInitSize = static_cast<int>(trainingPieces.size());
     for (int i = 0; i < trainingInitSize; ++i) {
+        DataPiece ori = trainingPieces[i];
         for (int k = 0; k < times; ++k) {
-            DataPiece ori = trainingPieces[i];
-            vector<pair<int, int>> track = ori.originalTrack;
 
-            //TODO get random degree in range
-            double degree;
-
-            rotateTrack(track, degree);
-            //sheerTrack(track);
-
-            DataPiece aug = generateDataPiece(track, resolution);
+            DataPiece aug = augmentDataPiece(ori, resolution);
             aug.setY(ori.Y);
             assert(aug.X.size() == resolution * 2);
+
             trainingPieces.push_back(aug);
         }
     }
 }
 
 DataPiece TrainingData::augmentDataPiece(DataPiece ori, int resolution) {
-    double angle = 2 * maxAugmentingRotation * (double) rand() / (double) RAND_MAX - maxAugmentingRotation;
-
     vector<pair<int, int>> track = ori.originalTrack;
 
+    /*
+     * Rotate track
+     */
+
+    double angle = 2 * maxAugmentingRotation * (double) rand() / (double) RAND_MAX - maxAugmentingRotation;
     rotateTrack(track, angle);
-    //sheerTrack(track);
+
+    /*
+     * Shear track
+     */
+
+    angle = 360 * (double) rand() / (double) RAND_MAX;
+    double shearFactor = maxAugmentingShearFactor * (double) rand() / (double) RAND_MAX;
+    pair<double, double> dir = make_pair(0, shearFactor);
+    rotateVector(dir, angle);
+    shearTrack(track, dir);
 
     DataPiece aug = generateDataPiece(track, resolution);
     aug.setY(ori.Y);
@@ -275,5 +279,32 @@ void TrainingData::rotateVector(pair<int, int> &v, double angle) {
 
     v.first = (int) x;
     v.second = (int) y;
+
+}
+
+void TrainingData::rotateVector(pair<double, double> &v, double angle) {
+    angle*= M_PI/ 180;
+
+    double x,y;
+    x = v.first * cos(angle) - v.second * sin(angle);
+    y = v.first * sin(angle) + v.second * cos(angle);
+
+    v.first = x;
+    v.second = y;
+
+}
+
+void TrainingData::shearTrack(vector<pair<int, int>> &track, pair<double, double> &dir) {
+    pair<int,int> origin = track[0];
+    for (pair<int, int> &v : track) {
+        v.first += int(dir.first * v.second);
+        v.second += int(dir.second * v.first);
+    }
+
+    pair<int, int> shift = make_pair(origin.first -track[0].first, origin.second - track[0].second);
+    for (pair<int, int> &v : track) {
+        v.first += shift.first;
+        v.second += shift.second;
+    }
 
 }
