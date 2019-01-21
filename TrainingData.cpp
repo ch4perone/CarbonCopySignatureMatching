@@ -189,9 +189,23 @@ vector<string> TrainingData::getFiles() {
     return files;
 }
 
-string TrainingData::getMetaInfo(int finalEpoch) {
-    //TODO
-    return "";
+string TrainingData::getMetaInfo(int finalEpoch, double finalTestLoss) {
+    string metaInfo = "#***Training info***\n#Training files: ";
+    for (string &file : files) {
+        metaInfo+=file + " ";
+    }
+
+
+    if(augmented) {
+        metaInfo += "\n#Trained on initial number of " + to_string(trainingInitSize) + " data tracks. By data augmentation increased to a total number of " + to_string(trainingPieces.size()) + " data tracks.";
+    } else {
+        metaInfo += "\n#Trained on " + to_string(trainingPieces.size()) + " data tracks.";
+    }
+    metaInfo += "\n#Tested on " + to_string(testPieces.size()) + " data tracks.";
+    metaInfo += "\n#Epochs trained: " + to_string(finalEpoch);
+    metaInfo += "\n#Final test loss: " + to_string(finalTestLoss) + "\n#";
+
+    return metaInfo;
 }
 
 int TrainingData::getTrainingSampleSize() {
@@ -203,8 +217,8 @@ int TrainingData::getTestSampleSize() {
 }
 
 void TrainingData::augmentTrainingData(int times) {
-
-    int trainingInitSize = static_cast<int>(trainingPieces.size());
+    augmented = true;
+    trainingInitSize = static_cast<int>(trainingPieces.size());
     for (int i = 0; i < trainingInitSize; ++i) {
         DataPiece ori = trainingPieces[i];
         for (int k = 0; k < times; ++k) {

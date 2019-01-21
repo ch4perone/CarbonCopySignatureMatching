@@ -55,6 +55,8 @@ private:
     vector<DataPiece> trainingPieces;
     vector<DataPiece> testPieces;
 
+    int trainingInitSize;
+    bool augmented = false;
     static double maxAugmentingRotation;
     static double maxAugmentingShearFactor;
 
@@ -86,7 +88,7 @@ public:
     int getTestSampleSize();
 
     void flushTrainingProgressToConsole(int currentEpoch, int maxEpoch, double recentLoss);
-    string getMetaInfo(int finalEpoch);
+    string getMetaInfo(int finalEpoch, double finalTestLoss);
 
     void restartTraining();
     void restartTesting();

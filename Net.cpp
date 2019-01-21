@@ -210,16 +210,21 @@ void Net::printNetworkStructureVisualization() {
 bool Net::loadWeightsFromSource(string &path, vector<unsigned> &topology, vector<vector <vector<double> > > &weight_cube) {
     ifstream f(path, ios::in);
 
-
-
     //get topology
     string line;
     string label;
 
-    getline(f, line);
-    stringstream ss1(line);
+    while(!f.eof()) {
+        getline(f, line);
+        if (line[0] != char('#') ) {
+            cout << line << endl;
+            break;
+        }
+    }
 
+    stringstream ss1(line);
     ss1 >> label;
+
 
     if(f.eof() || label.compare("topology:") != 0)
         return false;
@@ -296,13 +301,25 @@ double Net::getLoss(const vector<double> &targetValues) {
 
 }
 
-bool Net::saveNetworkToFile(string path, string trainingMetaInfo) {
+bool Net::saveNetworkToFile(string path, int argc, char** argv, string trainingMetaInfo) {
     stringstream ss = getNetStructure();
     ofstream f(path);
     if (!f.good()) {
         cout << "Error: output file " << path << "not good" << endl;
         return false;
     }
+
+    string cmd = "";
+    for (int i = 0; i < argc; ++i) {
+        cmd+= argv[i];
+        cmd+= " ";
+    }
+
+    time_t t = time(0);   // get time now
+    struct tm * now = localtime( & t );
+    string date = to_string(now->tm_mon + 1) + "/" + to_string(now->tm_mday) + "/" + to_string(now->tm_year + 1900);
+    f << "#Neural network weight configuration\n#\n#Constructed by Carbon Copy Signature Matching - training application\n#Executed with: " << cmd << "\n#Latest update: " << date << "\n#" << endl;
+    f << trainingMetaInfo << endl;
     f << ss.str();
     f.close();
     return true;

@@ -33,7 +33,7 @@ public:
     void getOutput(vector<double> &outputValues) const;
     double getLoss(const vector<double> &targetValues);
 
-    bool saveNetworkToFile(string path, string trainingMetaInfo);
+    bool saveNetworkToFile(string path, int argc, char** argv, string trainingMetaInfo);
 
     void printNetworkStructureVisualization();
     vector<unsigned> getTopology();

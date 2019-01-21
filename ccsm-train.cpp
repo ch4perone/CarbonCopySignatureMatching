@@ -153,10 +153,10 @@ int main(int argc, char** argv) {
         }
         cout << endl << "Network successfully trained" << endl;
 
-        string trainingMetaInfo = trainingData.getMetaInfo(epochs); //TODO
-        
+        string trainingMetaInfo = trainingData.getMetaInfo(epochs, loss);
+
         //save final network structure
-        if(ANN.saveNetworkToFile(args["out"].as<string>(), trainingMetaInfo) ) {
+        if(ANN.saveNetworkToFile(args["out"].as<string>(), argc, argv, trainingMetaInfo) ) {
            cout << "Network successfully saved as " << args["out"].as<string>() << endl;
         } else {
             cout << "Error: Saving network failed" << endl;
