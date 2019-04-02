@@ -22,7 +22,6 @@ Net::Net(int resolution, int numClasses, int width, int depth) {
         }
         layers.back().back().setOutputValue(1.0);
     }
-
 }
 
 Net::Net(string source) {

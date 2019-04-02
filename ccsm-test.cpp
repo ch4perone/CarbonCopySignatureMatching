@@ -84,11 +84,7 @@ int main(int argc, char** argv) {
                     if (event.mouseButton.button == Mouse::Left) {
                         trackPad.trackMouseMovement();
                     } else if (event.mouseButton.button == Mouse::Button::Right) {
-                        vector<unsigned> train = {615, 293, 615, 295, 615, 302, 615, 316, 615, 332, 611, 349, 609, 367, 605, 375, 594, 404, 580, 432, 560, 461, 538, 486, 510, 503, 481, 526, 458, 540, 441, 551, 416, 560, 389, 565, 360, 565, 344, 565, 335, 565, 328, 565, 323, 565, 319, 563, 317, 560, 316, 557, 311, 549, 309, 535, 311, 516, 313, 492, 329, 459, 343, 447, 355, 443, 359, 438, 371, 436, 388, 436, 409, 443, 432, 458, 464, 494, 507, 536, 551, 584, 596, 644, 649, 704, 694, 745, 739, 779, 772, 809, 803, 828, 820, 839, 845, 845, 847, 842, 848, 838, 850, 837, 852, 832, 852, 830, 852, 827, 852, 822};
 
-                        /*
-                         * TODO CLEAN ALL THIS UP >> move to TrackPad::validateTrack(Net ...)
-                         */
                         Track track = trackPad.getCurrentTrack();
                         vector<pair<int, int>> trackVector;
                         for(Vector2f v : track) {
@@ -103,7 +99,7 @@ int main(int argc, char** argv) {
                         net.getOutput(prediction);
                         string s = "Prediction: ";
                         for (double p : prediction) {
-                            s+=to_string(p) + " ";
+                            s+=to_string(p).substr(0,4) + " ";
                         }
                         trackPad.drawInfoText(s);
                         trackPad.drawCurrentTrack(false);
