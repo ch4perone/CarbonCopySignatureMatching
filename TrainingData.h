@@ -12,14 +12,15 @@ typedef vector<vector<double> > matrix;
 struct DataPiece {
     vector<double> X;
     vector<double> Y;
-    vector<pair<int, int>> originalTrack;
+    vector<pair<double, double>> originalTrack;
+    bool isAugmented = false;
 
-    DataPiece(vector<double> X, vector<pair<int, int>> originalTrack) {
+    DataPiece(vector<double> X, vector<pair<double, double>> originalTrack) {
         this->X = X;
         this->originalTrack = originalTrack;
     }
 
-    DataPiece(vector<double> X, vector<double> Y, vector<pair<int, int>> originalTrack) {
+    DataPiece(vector<double> X, vector<double> Y, vector<pair<double, double>> originalTrack) {
         this->X = X;
         this->Y = Y;
         this->originalTrack = originalTrack;
@@ -98,16 +99,15 @@ public:
      * Static: Pre-processing of pixel track according to network resolution and generation DataPiece object
      */
 
-    static DataPiece generateDataPiece(vector<pair<int, int>> &track, int resolution);
+    static DataPiece generateDataPiece(vector<pair<double, double>> &track, int resolution);
     static DataPiece augmentDataPiece(DataPiece ori, int resolution);
 
 private:
-    static pair<double, double> normalizedDirectionVector(pair<int, int> coordinate1, pair<int, int> coordinate2);
-    static void interpolateTrack(vector<pair<int, int>> &track);
-    static void rotateTrack(vector<pair<int, int>> &track, double angle);
-    static void shearTrack(vector<pair<int, int>> &track, pair<double, double> &dir);
+    static pair<double, double> normalizedDirectionVector(pair<double, double> coordinate1, pair<double, double> coordinate2);
+    static void interpolateTrack(vector<pair<double, double>> &track);
+    static void rotateTrack(vector<pair<double, double>> &track, double angle);
+    static void shearTrack(vector<pair<double, double>> &track, pair<double, double> &dir);
 
-    static void rotateVector(pair<int, int> &v, double angle);
     static void rotateVector(pair<double, double> &v, double angle);
 
     vector<string> getFilesInDirectory(string path, string extension);

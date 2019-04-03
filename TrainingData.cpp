@@ -19,20 +19,20 @@ TrainingData::TrainingData(string path, int resolution) {
     this->resolution = resolution;
 
     for(int i = 0; i < files.size(); ++i) {
-
         //init ground truth output vector
         vector<double> Y(files.size(), 0);
         Y[i] = 1.f;
 
         string file = files[i];
+        cout << "[" << i << "] " << file <<endl;
         ifstream f(file, ios::in);
         while(!f.eof()) {
             string line;
             getline(f, line);
 
             stringstream ss(line);
-            vector<pair<int, int>> track;
-            int x,y;
+            vector<pair<double, double>> track;
+            double x,y;
             while(ss >> x >> y) {
                 track.emplace_back(x,y);
             }
@@ -49,7 +49,7 @@ TrainingData::TrainingData(string path, int resolution) {
 
 
 
-DataPiece TrainingData::generateDataPiece(vector<pair<int, int>> &track, int resolution) {
+DataPiece TrainingData::generateDataPiece(vector<pair<double, double>> &track, int resolution) {
     /*
      * Crucial algorithm to extract direction vectors from pixel tracks
      *      Select pixel coordinates according to network resolution
@@ -63,12 +63,12 @@ DataPiece TrainingData::generateDataPiece(vector<pair<int, int>> &track, int res
     }
 
     //Begin connect first coordinate
-    pair<int, int> coordinate1 = track[0];
+    pair<double, double> coordinate1 = track[0];
     int steps = static_cast<int>(track.size() / resolution);
 
     //Connect intermediate coordinate iteratively
     for (int i = 1; i < resolution; ++i) {
-        pair<int, int> coordinate2 = track[i*steps];
+        pair<double, double> coordinate2 = track[i*steps];
         pair<double, double> vec = normalizedDirectionVector(coordinate1, coordinate2);
 
         inputVector.push_back(vec.first);
@@ -78,7 +78,7 @@ DataPiece TrainingData::generateDataPiece(vector<pair<int, int>> &track, int res
     }
 
     //Connect with last coordinate
-    pair<int, int> coordinate2 = track.back();
+    pair<double, double> coordinate2 = track.back();
     pair<double, double> vec = normalizedDirectionVector(coordinate1, coordinate2);
     inputVector.push_back(vec.first);
     inputVector.push_back(vec.second);
@@ -115,11 +115,11 @@ DataPiece TrainingData::getNextTestDataPiece() {
 }
 
 float TrainingData::getTrainingProgress() {
-    return float(trainingIndex) / float(trainingPieces.size());
+    return double(trainingIndex) / double(trainingPieces.size());
 }
 
 float TrainingData::getTestProgress() {
-    return float(testIndex) / float(testPieces.size());
+    return double(testIndex) / double(testPieces.size());
 }
 
 void TrainingData::restartTraining() {
@@ -136,22 +136,23 @@ void TrainingData::flushTrainingProgressToConsole(int currentEpoch, int maxEpoch
     //TODO make fancy progress bar
 }
 
-void TrainingData::interpolateTrack(vector<pair<int, int>> &track) {
-    vector<pair<int, int>> interpolation;
+void TrainingData::interpolateTrack(vector<pair<double, double>> &track) {
+    vector<pair<double, double>> interpolation;
 
     for (int i = 0; i < track.size() - 1; ++i) {
-        pair<int, int> coordinate1 = track[i];
-        pair<int, int> coordinate2 = track[i+1];
-        pair<int, int> inbetween = {(coordinate1.first + coordinate2.first) / 2, (coordinate1.second + coordinate2.second) / 2};
+        pair<double, double> coordinate1 = track[i];
+        pair<double, double> coordinate2 = track[i+1];
+        pair<double, double> inbetween = {(coordinate1.first + coordinate2.first) / 2, (coordinate1.second + coordinate2.second) / 2};
         interpolation.push_back(coordinate1);
         interpolation.push_back(inbetween);
+
     }
     interpolation.push_back(track.back());
     track = interpolation;
 
 }
 
-pair<double, double> TrainingData::normalizedDirectionVector(pair<int, int> coordinate1, pair<int, int> coordinate2) {
+pair<double, double> TrainingData::normalizedDirectionVector(pair<double, double> coordinate1, pair<double, double> coordinate2) {
     double x = coordinate2.first - coordinate1.first;
     double y = coordinate2.second - coordinate1.second;
     double length = sqrt(x*x + y*y);
@@ -233,7 +234,7 @@ void TrainingData::augmentTrainingData(int times) {
 }
 
 DataPiece TrainingData::augmentDataPiece(DataPiece ori, int resolution) {
-    vector<pair<int, int>> track = ori.originalTrack;
+    vector<pair<double, double>> track = ori.originalTrack;
 
     /*
      * Rotate track
@@ -254,17 +255,18 @@ DataPiece TrainingData::augmentDataPiece(DataPiece ori, int resolution) {
 
     DataPiece aug = generateDataPiece(track, resolution);
     aug.setY(ori.Y);
+    aug.isAugmented = true;
     assert(aug.X.size() == resolution * 2);
 
     return aug;
 }
 
-void TrainingData::rotateTrack(vector<pair<int, int>> &track, double angle) {
+void TrainingData::rotateTrack(vector<pair<double, double>> &track, double angle) {
 
-    int center_x = 0;
-    int center_y = 0;
+    double center_x = 0;
+    double center_y = 0;
 
-    for (pair<int,int> v : track) {
+    for (pair<double, double> v : track) {
         center_x+=v.first;
         center_y+=v.second;
     }
@@ -272,8 +274,8 @@ void TrainingData::rotateTrack(vector<pair<int, int>> &track, double angle) {
     center_x /= track.size();
     center_y /= track.size();
 
-    for (pair<int,int> &v : track) {
-        pair<int, int> dif;
+    for (pair<double,double> &v : track) {
+        pair<double, double> dif;
         dif.first = v.first - center_x;
         dif.second = v.second - center_y;
 
@@ -282,18 +284,6 @@ void TrainingData::rotateTrack(vector<pair<int, int>> &track, double angle) {
         v.first = dif.first + center_x;
         v.second = dif.second + center_y;
     }
-}
-
-void TrainingData::rotateVector(pair<int, int> &v, double angle) {
-    angle*= M_PI/ 180;
-
-    double x,y;
-    x = double(v.first) * cos(angle) - double(v.second) * sin(angle);
-    y = double(v.first) * sin(angle) + double(v.second) * cos(angle);
-
-    v.first = (int) x;
-    v.second = (int) y;
-
 }
 
 void TrainingData::rotateVector(pair<double, double> &v, double angle) {
@@ -308,15 +298,15 @@ void TrainingData::rotateVector(pair<double, double> &v, double angle) {
 
 }
 
-void TrainingData::shearTrack(vector<pair<int, int>> &track, pair<double, double> &dir) {
-    pair<int,int> origin = track[0];
-    for (pair<int, int> &v : track) {
-        v.first += int(dir.first * v.second);
-        v.second += int(dir.second * v.first);
+void TrainingData::shearTrack(vector<pair<double, double>> &track, pair<double, double> &dir) {
+    pair<double, double> origin = track[0];
+    for (pair<double, double> &v : track) {
+        v.first += dir.first * v.second;
+        v.second += dir.second * v.first;
     }
 
-    pair<int, int> shift = make_pair(origin.first -track[0].first, origin.second - track[0].second);
-    for (pair<int, int> &v : track) {
+    pair<double, double> shift = make_pair(origin.first -track[0].first, origin.second - track[0].second);
+    for (pair<double, double> &v : track) {
         v.first += shift.first;
         v.second += shift.second;
     }

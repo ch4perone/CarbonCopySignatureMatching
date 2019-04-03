@@ -4,6 +4,7 @@
 #include <fstream>
 #include <chrono>
 #include <thread>
+#include <cmath>
 #include "TrainingData.h"
 #include "Net.h"
 
@@ -87,6 +88,7 @@ int main(int argc, char** argv) {
     auto args = parseArguments(argc, argv);
     auto argsList = args.arguments();
 
+    srand(time(0));
 
     // Train network(s)
     if (!args.count("multiples")) {         //Generate a single initial neural network
@@ -99,6 +101,7 @@ int main(int argc, char** argv) {
         trainingData.splitTestTrainingData(trainTestSplit, true);
         trainingData.augmentTrainingData(4);
         trainingData.shuffleTrainingData();
+
 
 
         //Setup neural network
@@ -125,6 +128,12 @@ int main(int argc, char** argv) {
                 ANN.getOutput(prediction);
                 ANN.backPropagate(input.Y);
 
+                for (double p : prediction) {
+                    if(isnan(p)) {
+                        cout << "bad" << endl;
+                    }
+                }
+
                 trainingData.flushTrainingProgressToConsole(e, epochs, loss);
                 //std::this_thread::sleep_for(std::chrono::milliseconds(10));
             }
@@ -143,13 +152,12 @@ int main(int argc, char** argv) {
             }
             loss /= trainingData.getTestSampleSize();
 
-            if(previousLoss < loss) {
-                cout << "Early Stop Triggered: Caused by increasing test loss after " << e << " epochs.";
+            if(previousLoss < loss && args.count("earlyStopping")) {
+                cout << "\nEarly Stop Triggered: Caused by increasing test loss after " << e << " epochs.";
                 epochs = e;
                 break;
             }
             previousLoss = loss;
-
         }
         cout << endl << "Network successfully trained" << endl;
 

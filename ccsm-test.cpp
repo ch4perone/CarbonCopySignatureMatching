@@ -86,9 +86,9 @@ int main(int argc, char** argv) {
                     } else if (event.mouseButton.button == Mouse::Button::Right) {
 
                         Track track = trackPad.getCurrentTrack();
-                        vector<pair<int, int>> trackVector;
+                        vector<pair<double, double >> trackVector;
                         for(Vector2f v : track) {
-                            trackVector.push_back({static_cast<const int &>(v.x), static_cast<const int &>(v.y)});
+                            trackVector.push_back({v.x, v.y});
                         }
                         /*for (int i = 0; i < train.size(); i+=2) {
                             trackVector.push_back({train[i], train[i+1]});
