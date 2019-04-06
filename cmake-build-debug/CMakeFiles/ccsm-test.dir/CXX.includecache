@@ -6,6 +6,18 @@
 
 #IncludeRegexTransform: 
 
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.cpp
+cassert
+-
+cmath
+-
+iostream
+-
+fstream
+-
+Net.h
+/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.h
+
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.h
 sstream
 -
@@ -17,36 +29,4 @@ Neuron.h
 /home/chaperone/projects/cpp/CarbonCopySignatureMatching/Neuron.h
 vector
 -
-
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.h
-iostream
--
-cxxopts.hpp
--
-SFML/Graphics.hpp
--
-fstream
--
-
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h
-string
--
-vector
--
-
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/ccsm-test.cpp
-iostream
--
-cxxopts.hpp
--
-SFML/Graphics.hpp
--
-fstream
--
-TrackPad.h
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrackPad.h
-Net.h
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/Net.h
-TrainingData.h
-/home/chaperone/projects/cpp/CarbonCopySignatureMatching/TrainingData.h
 

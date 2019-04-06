@@ -14,6 +14,7 @@ private:
     double recentAverageError;
     double recentAverageSmoothingFactor;
     vector<unsigned> topology;
+    vector<string> outputNames;
 
 public:
     //initialize and compose (new) random weighted network
@@ -37,6 +38,8 @@ public:
 
     void printNetworkStructureVisualization();
     vector<unsigned> getTopology();
+    vector<string> getOutputNames();
+
 private:
     stringstream getNetStructure() const;
     double crossEntropyLoss(const vector<double> &targetValues, const vector<double> &estimatedValues);

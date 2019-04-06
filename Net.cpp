@@ -216,8 +216,16 @@ bool Net::loadWeightsFromSource(string &path, vector<unsigned> &topology, vector
     while(!f.eof()) {
         getline(f, line);
         if (line[0] != char('#') ) {
-            cout << line << endl;
             break;
+        }
+        //Load names of signatures
+        if(line.substr(0,16) == "#Training files:") {
+            stringstream ss(line.substr(17));
+            string name;
+            while(ss >> name) {
+                const size_t last_slash_idx = name.find_last_of('/');
+                outputNames.push_back(name.substr(last_slash_idx + 1));
+            }
         }
     }
 
@@ -322,5 +330,9 @@ bool Net::saveNetworkToFile(string path, int argc, char** argv, string trainingM
     f << ss.str();
     f.close();
     return true;
+}
+
+vector<string> Net::getOutputNames() {
+    return outputNames;
 }
 

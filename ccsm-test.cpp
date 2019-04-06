@@ -66,6 +66,8 @@ int main(int argc, char** argv) {
      */
     Net net(args["name"].as<string>());
     int resolution = net.getTopology()[0] / 2;
+    vector<string> signaturesNames = net.getOutputNames();
+
     /*
      * With open window
      */
@@ -88,7 +90,7 @@ int main(int argc, char** argv) {
                         Track track = trackPad.getCurrentTrack();
                         vector<pair<double, double >> trackVector;
                         for(Vector2f v : track) {
-                            trackVector.push_back({v.x, v.y});
+                            trackVector.emplace_back(v.x, v.y);
                         }
                         /*for (int i = 0; i < train.size(); i+=2) {
                             trackVector.push_back({train[i], train[i+1]});
@@ -99,8 +101,10 @@ int main(int argc, char** argv) {
                         net.getOutput(prediction);
                         string s = "Prediction: ";
                         for (double p : prediction) {
-                            s+=to_string(p).substr(0,4) + " ";
+                            s+=to_string(p).substr(1,3) + " ";
                         }
+                        int maxIndex = std::distance(prediction.begin(), std::max_element(prediction.begin(), prediction.end()));
+                        s+= signaturesNames[maxIndex];
                         trackPad.drawInfoText(s);
                         trackPad.drawCurrentTrack(false);
                         trackPad.clearTrack();

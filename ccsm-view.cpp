@@ -109,7 +109,7 @@ int main(int argc, char** argv) {
                     }
                     else if (event.key.code == Keyboard::A) {
                         Track track = trackPad.getCurrentTrack();
-                        vector<pair<int, int>> trackVector;
+                        vector<pair<double, double >> trackVector;
                         for (Vector2f v : track) {
                             trackVector.push_back(make_pair(v.x, v.y));
                         }
@@ -119,7 +119,7 @@ int main(int argc, char** argv) {
                         ori.printContent();
                         aug.printContent();
 
-                        vector<pair<int, int>> augVector = aug.originalTrack;
+                        vector<pair<double , double >> augVector = aug.originalTrack;
 
                         trackPad.drawInfoText("Augmentation");
                         trackPad.setCurrentTrack(augVector);
